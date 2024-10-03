@@ -7,12 +7,19 @@ function SearchBar({ onSearch }) {
     onSearch(query);
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <div className="search">
       <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        onKeyPress={handleKeyPress}
         placeholder="Search for books..."
       />
       <button onClick={handleSearch}>Search</button>
