@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import { CartContext } from './CartContext';
+import { CartContext } from '../context/CartContext';
 
 function Cart() {
   const { cart, removeFromCart } = useContext(CartContext);
 
-  const totalPrice = cart.reduce((total, item) => total + item.price, 0).toFixed(2);
+  const totalPrice = cart.reduce((total, item) => total + (item.price || 0), 0).toFixed(2);
 
   return (
     <div>

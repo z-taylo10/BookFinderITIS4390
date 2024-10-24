@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const mainGenres = [
   'Fiction',
@@ -14,12 +15,19 @@ const mainGenres = [
 ];
 
 function Genres({ onGenreClick }) {
+  const navigate = useNavigate();
+
+  const handleGenreClick = (genre) => {
+    onGenreClick(genre);
+    navigate('/genre');
+  };
+
   return (
     <div className="genres-container">
       <h2>Main Genres</h2>
       <ul>
         {mainGenres.map((genre, index) => (
-          <li key={index} onClick={() => onGenreClick(genre)}>
+          <li key={index} onClick={() => handleGenreClick(genre)}>
             {genre}
           </li>
         ))}

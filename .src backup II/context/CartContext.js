@@ -7,20 +7,24 @@ export const CartProvider = ({ children }) => {
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem('cart'));
-    if (storedCart) {
+    console.log('Loaded cart from localStorage:', storedCart); // Debugging line
+    if (storedCart && Array.isArray(storedCart)) {
       setCart(storedCart);
     }
   }, []);
 
   useEffect(() => {
+    console.log('Saving cart to localStorage:', cart); // Debugging line
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
   const addToCart = (item) => {
+    console.log('Adding to cart:', item);
     setCart((prevCart) => [...prevCart, item]);
   };
 
   const removeFromCart = (index) => {
+    console.log('Removing from cart:', index);
     setCart((prevCart) => prevCart.filter((_, i) => i !== index));
   };
 
@@ -30,4 +34,3 @@ export const CartProvider = ({ children }) => {
     </CartContext.Provider>
   );
 };
-

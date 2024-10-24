@@ -1,10 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function SearchBar({ onSearch }) {
   const [query, setQuery] = React.useState('');
+  const navigate = useNavigate();
 
   const handleSearch = () => {
     onSearch(query);
+    navigate('/search');
   };
 
   const handleKeyPress = (event) => {
