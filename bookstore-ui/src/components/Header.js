@@ -19,7 +19,7 @@ function Header() {
   return (
     <header className="header">
       <div className="logo">
-        <Link to="/"><img src="/dummy-logo.png" alt="Logo" /></Link>
+        <Link to="/"><img src="/bookstorelogo.png" alt="Logo" /></Link>
       </div>
       <nav>
         <ul className="nav-links">
