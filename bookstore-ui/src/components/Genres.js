@@ -22,7 +22,6 @@ function Genres({ onGenreClick }) {
     navigate('/genre');
   };
 
-  // test 
   return (
     <div className="genres-container"> 
       <h2>Main Genres</h2>

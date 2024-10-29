@@ -9,6 +9,7 @@ import GenrePage from './pages/GenrePage';
 import Cart from './components/Cart';
 import Header from './components/Header';
 import Genres from './components/Genres';
+import AccountsPage from './pages/AccountsPage';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -29,6 +30,7 @@ function App() {
             <Route path="/genres" element={<Genres onGenreClick={handleGenreClick} />} />
             <Route path="/genre" element={<GenrePage genre={selectedGenre} />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/accounts" element={<AccountsPage />} />
           </Routes>
         </div>
       </Router>

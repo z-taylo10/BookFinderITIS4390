@@ -6,7 +6,7 @@ function Cart() {
 
   console.log('Rendering cart with items:', cart); // Debugging line
 
-  const totalPrice = cart.reduce((total, item) => total + (item.price || 0), 0).toFixed(2);
+  const totalPrice = cart.reduce((total, item) => total + parseFloat(item.price || 0), 0).toFixed(2);
 
   return (
     <div>

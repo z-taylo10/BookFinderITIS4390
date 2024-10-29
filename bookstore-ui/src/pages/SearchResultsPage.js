@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useLocation } from 'react-router-dom';
 import BookList from '../components/BookList';
 import Pagination from '../components/Pagination';
-import SearchBar from '../components/SearchBar'; // Import SearchBar
 import axios from 'axios';
 
-function SearchResultsPage({ query }) {
+function SearchResultsPage() {
+  const location = useLocation();
+  const query = location.state?.query || '';
   const [books, setBooks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -34,8 +36,7 @@ function SearchResultsPage({ query }) {
 
   return (
     <div>
-      <SearchBar onSearch={fetchBooks} />
-      <h2>Search Results for "{currentQuery}"</h2> {/* Use currentQuery */}
+      <h2>Search Results for "{currentQuery}"</h2>
       <BookList books={books} />
       <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
     </div>
