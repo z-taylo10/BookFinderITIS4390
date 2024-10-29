@@ -9,14 +9,13 @@ const BooksPage = () => {
   const [books, setBooks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [searchQuery, setSearchQuery] = useState(''); // for text search
   const [genre, setGenre] = useState('Fiction'); // Default genre
 
-  // Fetch books based on search query and genre
+  // Fetch books based on genre and pagination
   const fetchBooks = useCallback(async () => {
     const baseUrl = 'https://www.googleapis.com/books/v1/volumes';
     const params = {
-      q: `${searchQuery || ''} subject:${genre}`, // Combine genre with search
+      q: `subject:${genre}`, // Filter by genre
       maxResults: 12,
       startIndex: (currentPage - 1) * 12,
     };
@@ -28,9 +27,8 @@ const BooksPage = () => {
     } catch (error) {
       console.error('Failed to retrieve data:', error);
     }
-  }, [searchQuery, genre, currentPage]);
+  }, [genre, currentPage]);
 
-  // Call fetchBooks whenever searchQuery, genre, or currentPage changes
   useEffect(() => {
     fetchBooks();
   }, [fetchBooks]);
@@ -42,8 +40,8 @@ const BooksPage = () => {
   };
 
   const handleGenreChange = (event) => {
-    setGenre(event.target.value);
-    setCurrentPage(1); // Reset to first page for a new genre
+    setGenre(event.target.value); // Update genre
+    setCurrentPage(1); // Reset to first page for new genre
   };
 
   return (
@@ -64,6 +62,7 @@ const BooksPage = () => {
         {books.map((book, index) => (
           <BookCard
             key={index}
+            id={book.id} // Pass book ID to link to detail page
             title={book.volumeInfo.title}
             author={book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown'}
             cover={book.volumeInfo.imageLinks?.thumbnail || '/placeholder.jpg'}
