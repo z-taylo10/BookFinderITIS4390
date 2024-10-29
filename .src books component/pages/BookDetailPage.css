@@ -1,0 +1,28 @@
+/* src/pages/BookDetailPage.css */
+
+.book-detail-page {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .book-detail-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .book-detail-content img {
+    max-width: 200px;
+    border-radius: 8px;
+  }
+  
+  .book-info {
+    max-width: 600px;
+    text-align: left;
+  }
+  
+  .book-info p {
+    margin: 5px 0;
+  }
+  
