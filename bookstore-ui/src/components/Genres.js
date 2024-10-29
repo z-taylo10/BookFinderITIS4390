@@ -22,8 +22,9 @@ function Genres({ onGenreClick }) {
     navigate('/genre');
   };
 
+  // test 
   return (
-    <div className="genres-container">
+    <div className="genres-container"> 
       <h2>Main Genres</h2>
       <ul>
         {mainGenres.map((genre, index) => (
