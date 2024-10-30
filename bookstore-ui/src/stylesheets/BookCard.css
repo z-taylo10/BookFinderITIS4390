@@ -14,18 +14,21 @@
   }
   
   .book-cover {
-    width: 100%;
-    height: auto;
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
     border-radius: 5px;
   }
   
   .book-title {
     margin-top: 8px;
     font-size: 1.1em;
+    text-align: center;
   }
   
   .book-author {
     font-size: 0.9em;
     color: #555;
+    text-align: center;
   }
   
