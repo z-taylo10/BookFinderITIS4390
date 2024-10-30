@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import BookCard from '../components/BookCard';
-import './BooksPage.css';
+import '../stylesheets/BooksPage.css';
 
 const BooksPage = () => {
   const [books, setBooks] = useState([]);

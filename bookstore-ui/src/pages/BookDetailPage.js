@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import './BookDetailPage.css';
+import '../stylesheets/BookDetailPage.css';
 
 const BookDetailPage = () => {
   const { bookId } = useParams();

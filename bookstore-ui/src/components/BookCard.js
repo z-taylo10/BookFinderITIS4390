@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './BookCard.css';
+import '../stylesheets/BookCard.css';
 
 const BookCard = ({ id, title, author, cover }) => {
   return (

@@ -1,0 +1,33 @@
+.sort-dropdown {
+  margin: 20px;
+  text-align: right;
+}
+
+.sort-dropdown select {
+  padding: 5px;
+  font-size: 16px;
+}
+
+.pagination-sort-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px;
+  align-items: baseline;
+}
+
+.pagination {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.sort-dropdown {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.sort-dropdown label {
+  margin-right: 10px;
+}
