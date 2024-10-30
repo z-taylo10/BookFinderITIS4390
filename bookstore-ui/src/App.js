@@ -10,6 +10,8 @@ import Cart from './components/Cart';
 import Header from './components/Header';
 import Genres from './components/Genres';
 import AccountsPage from './pages/AccountsPage';
+import Footer from './components/Footer';
+import BookDetailPage from './pages/BookDetailPage';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -31,7 +33,9 @@ function App() {
             <Route path="/genre" element={<GenrePage genre={selectedGenre} />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/accounts" element={<AccountsPage />} />
+            <Route path="/books/:bookId" element={<BookDetailPage />} /> {/* Book detail route */}
           </Routes>
+          <Footer />
         </div>
       </Router>
     </CartProvider>
