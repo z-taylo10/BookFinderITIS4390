@@ -23,10 +23,12 @@
     list-style: none;
     margin: 0;
     padding: 0;
+    position: relative;
   }
   
   .nav-links li {
     margin: 0 30px;
+    position: relative;
   }
   
   .nav-links a {
@@ -81,4 +83,35 @@
   .cart-profile span {
     color: #fff;
     margin-right: 20px;
+  }
+  
+  .nav-links li:hover .dropdown {
+    display: block;
+  }
+  
+  .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: -46px;
+    background-color: #333;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  .dropdown a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 5px 0;
+  }
+  
+  .dropdown a:hover {
+    background-color: #444;
+  }
+  
+  .dropdown li:first-child {
+    height: 10px; /* Adjust height as needed */
   } 

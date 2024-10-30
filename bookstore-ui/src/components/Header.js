@@ -23,7 +23,17 @@ function Header() {
       </div>
       <nav>
         <ul className="nav-links">
-          <li><Link to="/">Home</Link></li>
+          <li>
+            <a href="/">Home</a>
+            <div className="dropdown">
+              <li></li>
+              <li><a href="/landing-page">About</a></li>
+              <li><a href="/landing-page">Recommended</a></li>
+              <li><a href="/landing-page">News / Blog</a></li>
+              <li><a href="/landing-page">Store Policies</a></li>
+              <li><a href="/landing-page">Contact Us</a></li>
+            </div>
+          </li>
           <li><Link to="/genres">Books</Link></li>
         </ul>
       </nav>
