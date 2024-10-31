@@ -14,13 +14,14 @@ export const mainGenres = [
   'Self-Help'
 ];
 
-function Genres({ onGenreClick }) {
+function Genres() {
   const navigate = useNavigate();
 
   const handleGenreClick = (genre) => {
-    onGenreClick(genre);
-    navigate('/genre');
+    navigate(`/genre/${genre.toLowerCase()}`);
   };
+
+  const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
   return (
     <div className="genres-container"> 
@@ -28,7 +29,7 @@ function Genres({ onGenreClick }) {
       <ul>
         {mainGenres.map((genre, index) => (
           <li key={index} onClick={() => handleGenreClick(genre)}>
-            {genre}
+            {capitalize(genre)}
           </li>
         ))}
       </ul>

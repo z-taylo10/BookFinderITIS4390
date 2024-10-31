@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import BookList from '../components/BookList';
 import Pagination from '../components/Pagination';
 import axios from 'axios';
 
-function GenrePage({ genre }) {
+function GenrePage() {
+  const { genre } = useParams();
   const [books, setBooks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+
+  const capitalizeWords = (str) => {
+    return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  };
 
   useEffect(() => {
     const fetchBooksByGenre = async () => {
@@ -31,7 +37,7 @@ function GenrePage({ genre }) {
 
   return (
     <div>
-      <h2>Books in {genre}</h2>
+      <h2>Books in {capitalizeWords(genre)}</h2>
       <BookList books={books} />
       <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
     </div>
@@ -39,4 +45,3 @@ function GenrePage({ genre }) {
 }
 
 export default GenrePage;
-
