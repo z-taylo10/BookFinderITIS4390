@@ -58,10 +58,6 @@
   transform: translateX(-10px);
 }
 
-.actions input[type="checkbox"] {
-  margin-right: 10px;
-}
-
 .create-account-button,
 .cancel-button {
   width: 48%;
@@ -90,4 +86,10 @@
 .terms {
   color: #666;
   text-decoration: none;
+}
+
+.actions label {
+  transform: translateX(-5%);
+  white-space: nowrap;
+  color:#616161;
 }
