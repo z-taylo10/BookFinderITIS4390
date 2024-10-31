@@ -1,12 +1,18 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 
 function Cart() {
   const { cart, removeFromCart } = useContext(CartContext);
+  const navigate = useNavigate();
 
   console.log('Rendering cart with items:', cart); // Debugging line
 
   const totalPrice = cart.reduce((total, item) => total + parseFloat(item.price || 0), 0).toFixed(2);
+
+  const handleShipToYou = () => {
+    navigate('/shipping');
+  };
 
   return (
     <div>
@@ -25,6 +31,10 @@ function Cart() {
         ))}
       </ul>
       <h3>Total: ${totalPrice}</h3>
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '20px' }}>
+        <button onClick={handleShipToYou} style={{ padding: '10px 20px', borderRadius: '5px', backgroundColor: '#007bff', color: 'white', border: 'none', cursor: 'pointer' }}>Ship to You</button>
+        <button style={{ padding: '10px 20px', borderRadius: '5px', backgroundColor: '#28a745', color: 'white', border: 'none', cursor: 'pointer' }}>Pick up at Store</button>
+      </div>
     </div>
   );
 }
