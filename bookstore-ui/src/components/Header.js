@@ -33,7 +33,7 @@ function Header() {
           <div className="home-dropdown">
             <ul>
               <li><button onClick={() => navigate('/')}>About</button></li>
-              <li><button onClick={() => navigate('/')}>Recommended</button></li>
+              <li><a href="/recommendations">Recommended</a></li>
               <li><button onClick={() => navigate('/')}>News / Blog</button></li>
               <li><button onClick={() => navigate('/')}>Store Policies</button></li>
               <li><button onClick={() => navigate('/')}>Contact Us</button></li>
