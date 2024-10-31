@@ -2,13 +2,15 @@ import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 import { mainGenres } from './Genres';
-import SignInModal from './SignInModal'; // Import the SignInModal component
+import SignInModal from './SignInModal';
+import CreateAccountModal from './CreateAccountModal';
 import '../stylesheets/Header.css';
 
 function Header() {
   const [query, setQuery] = useState('');
   const [dropdownVisible, setDropdownVisible] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+  const [isCreateAccountModalOpen, setIsCreateAccountModalOpen] = useState(false);
   const navigate = useNavigate();
   const { cart } = useContext(CartContext);
 
@@ -21,8 +23,13 @@ function Header() {
     setDropdownVisible(!dropdownVisible);
   };
 
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
+  const toggleSignInModal = () => {
+    setIsSignInModalOpen(!isSignInModalOpen);
+    setDropdownVisible(false);
+  };
+
+  const toggleCreateAccountModal = () => {
+    setIsCreateAccountModalOpen(!isCreateAccountModalOpen);
     setDropdownVisible(false);
   };
 
@@ -97,15 +104,16 @@ function Header() {
           <img className="profile-icon" src="/generic_avatar.png" alt="Profile" onClick={toggleDropdown} />
           {dropdownVisible && (
             <div className="profile-dropdown">
-              <button className="sign-in" onClick={toggleModal}>Sign In</button>
-              <button onClick={() => navigate('/create-account')}>Create an Account</button>
+              <button className="sign-in" onClick={toggleSignInModal}>Sign In</button>
+              <button onClick={toggleCreateAccountModal}>Create an Account</button>
               <button onClick={() => navigate('/manage-account')}>Manage Account</button>
               <button onClick={() => navigate('/digital-library')}>My Digital Library</button>
             </div>
           )}
         </div>
       </div>
-      <SignInModal isOpen={isModalOpen} toggleModal={toggleModal} />
+      <SignInModal isOpen={isSignInModalOpen} toggleModal={toggleSignInModal} />
+      <CreateAccountModal isOpen={isCreateAccountModalOpen} closeAllModals={toggleCreateAccountModal} />
     </header>
   );
 }

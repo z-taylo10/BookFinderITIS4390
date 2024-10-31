@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../stylesheets/SignInModal.css';
+import CreateAccountModal from './CreateAccountModal';
 
 function SignInModal({ isOpen, toggleModal }) {
   const navigate = useNavigate();
+  const [isCreateAccountOpen, setIsCreateAccountOpen] = useState(false);
+
+  const closeAllModals = () => {
+    toggleModal();
+    setIsCreateAccountOpen(false);
+  };
 
   if (!isOpen) return null;
 
@@ -19,28 +26,35 @@ function SignInModal({ isOpen, toggleModal }) {
     }
   };
 
+  const openCreateAccount = () => {
+    setIsCreateAccountOpen(true);
+  };
+
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <button className="close" onClick={toggleModal}>
-          <img className="close-icon" src="/X.png" alt="Close" />
-        </button>
-        <h2>Sign in or Create an Account</h2>
-        <input type="email" placeholder="Email Address" />
-        <input type="password" placeholder="Password" />
-        <div className="actions">
-          <div>
-            <input type="checkbox" id="rememberMe" />
-            <label htmlFor="rememberMe">Remember Me</label>
+    <>
+      <div className="modal">
+        <div className="modal-content">
+          <button className="close" onClick={closeAllModals}>
+            <img className="close-icon" src="/X.png" alt="Close" />
+          </button>
+          <h2>Sign in or Create an Account</h2>
+          <input type="email" placeholder="Email Address" />
+          <input type="password" placeholder="Password" />
+          <div className="actions">
+            <div>
+              <input type="checkbox" id="rememberMe" />
+              <label htmlFor="rememberMe">Remember Me</label>
+            </div>
+            <a href="/">Forgot Password?</a>
           </div>
-          <a href="/">Forgot Password?</a>
+          <button className="sign-in-button" onClick={handleSignIn}>Sign In</button>
+          <button className="create-account-button" onClick={openCreateAccount}>Create an Account</button>
+          <a href="/" className="underline">Continue as a Guest</a>
+          <a href="/" className="terms">Terms of Use & Privacy Policy</a>
         </div>
-        <button className="sign-in-button" onClick={handleSignIn}>Sign In</button>
-        <button className="create-account-button">Create an Account</button>
-        <a href="/" className="underline">Continue as a Guest</a>
-        <a href="/" className="terms">Terms of Use & Privacy Policy</a>
       </div>
-    </div>
+      <CreateAccountModal isOpen={isCreateAccountOpen} closeAllModals={closeAllModals} />
+    </>
   );
 }
 
