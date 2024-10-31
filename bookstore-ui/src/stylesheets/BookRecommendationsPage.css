@@ -1,0 +1,19 @@
+/* Main Content Styling */
+.book-finder main {
+  padding: 20px;
+}
+
+.book-list {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.book-card {
+  width: 30%;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

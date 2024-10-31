@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext  } from 'react';
 import axios from 'axios';
 import { CartContext } from '../context/CartContext';
-import './BookRecommendationsPage.css';
+import '../stylesheets/BookRecommendationsPage.css';
 
 const BookRecommendationsPage = () => {
   const { addToCart } = useContext(CartContext);
@@ -53,7 +53,6 @@ const BookRecommendationsPage = () => {
               </div>
               <button onClick={() => addToCart(book)}>Add to Cart</button>
               <div className="book-actions">
-                <button className="btn">Buy Now</button>
                 <button className="btn">Add to Wishlist</button>
               </div>
             </div>
