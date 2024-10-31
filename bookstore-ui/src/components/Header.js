@@ -6,16 +6,21 @@ import '../stylesheets/Header.css';
 
 function Header() {
   const [query, setQuery] = useState('');
+  const [dropdownVisible, setDropdownVisible] = useState(false);
   const navigate = useNavigate();
   const { cart } = useContext(CartContext);
 
-  const handleGenreClick = (genre) => {
-    navigate(`/genre/${genre.toLowerCase()}`);
+  const handleSearch = (event) => {
+    event.preventDefault();
+    navigate('/search', { state: { query } });
   };
 
-  const handleBooksClick = () => {
-    navigate('/genres');
+  const toggleDropdown = () => {
+    setDropdownVisible(!dropdownVisible);
   };
+
+  const totalAmount = cart.reduce((total, item) => total + parseFloat(item.price || 0), 0).toFixed(2);
+  const itemCount = cart.length;
 
   return (
     <header className="header">
@@ -36,24 +41,24 @@ function Header() {
           </div>
         </div>
         <div className="nav-button">
-          <button onClick={handleBooksClick}>Books</button>
+          <button onClick={() => navigate('/genres')}>Books</button>
           <div className="books-dropdown">
             <ul>
               {mainGenres.slice(0, 3).map((genre, index) => (
                 <li key={index}>
-                  <button onClick={() => handleGenreClick(genre)}>{genre}</button>
+                  <button onClick={() => navigate(`/genre/${genre.toLowerCase()}`)}>{genre}</button>
                 </li>
               ))}
               <li><button onClick={() => navigate('/non-books')} style={{ color: 'red' }}>Non Book Item</button></li>
               {mainGenres.slice(3, 6).map((genre, index) => (
                 <li key={index + 3}>
-                  <button onClick={() => handleGenreClick(genre)}>{genre}</button>
+                  <button onClick={() => navigate(`/genre/${genre.toLowerCase()}`)}>{genre}</button>
                 </li>
               ))}
               <li><button onClick={() => navigate('/non-books')} style={{ color: 'red' }}>Non Book Item</button></li>
               {mainGenres.slice(6, 9).map((genre, index) => (
                 <li key={index + 6}>
-                  <button onClick={() => handleGenreClick(genre)}>{genre}</button>
+                  <button onClick={() => navigate(`/genre/${genre.toLowerCase()}`)}>{genre}</button>
                 </li>
               ))}
               <li><button onClick={() => navigate('/non-books')} style={{ color: 'red' }}>Non Book Item</button></li>
@@ -61,7 +66,7 @@ function Header() {
           </div>
         </div>
       </div>
-      <form className="search-bar" onSubmit={(e) => { e.preventDefault(); navigate('/search', { state: { query } }); }}>
+      <form className="search-bar" onSubmit={handleSearch}>
         <input
           type="text"
           placeholder="Search"
@@ -73,11 +78,19 @@ function Header() {
       <div className="cart-profile">
         <Link to="/cart">
           <img src="/dummy-cart.png" alt="Cart" />
-          <span>${cart.reduce((total, item) => total + parseFloat(item.price || 0), 0).toFixed(2)} ({cart.length} {cart.length === 1 ? 'item' : 'items'})</span>
+          <span>${totalAmount} ({itemCount} {itemCount === 1 ? 'item' : 'items'})</span>
         </Link>
-        <Link to="/accounts">
-          <img src="/dummy-profile.png" alt="Profile" />
-        </Link>
+        <div className="profile-dropdown-container">
+          <img src="/generic_avatar.png" alt="Profile" onClick={toggleDropdown} />
+          {dropdownVisible && (
+            <div className="profile-dropdown">
+              <button className="sign-in">Sign In</button>
+              <button onClick={() => navigate('/create-account')}>Create an Account</button>
+              <button onClick={() => navigate('/manage-account')}>Manage Account</button>
+              <button onClick={() => navigate('/digital-library')}>My Digital Library</button>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );
