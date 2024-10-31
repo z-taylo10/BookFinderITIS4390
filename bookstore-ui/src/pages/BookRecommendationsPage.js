@@ -16,7 +16,7 @@ const BookRecommendationsPage = () => {
         const bookData = response.data.items.map(item => ({
           title: item.volumeInfo.title,
           genre: item.volumeInfo.categories ? item.volumeInfo.categories[0] : 'Unknown',
-          price: item.saleInfo.retailPrice ? `$${item.saleInfo.retailPrice.amount}` : 'Free',
+          price: item.saleInfo.retailPrice ? `${item.saleInfo.retailPrice.amount}` : 'Free',
           publisher: item.volumeInfo.publisher || 'Unknown',
           image: item.volumeInfo.imageLinks?.thumbnail || 'No image available',
           authors:  item.volumeInfo.authors,

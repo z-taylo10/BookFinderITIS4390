@@ -2,11 +2,13 @@ import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 import { mainGenres } from './Genres';
+import SignInModal from './SignInModal'; // Import the SignInModal component
 import '../stylesheets/Header.css';
 
 function Header() {
   const [query, setQuery] = useState('');
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const { cart } = useContext(CartContext);
 
@@ -17,6 +19,11 @@ function Header() {
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
+  };
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+    setDropdownVisible(false);
   };
 
   const totalAmount = cart.reduce((total, item) => total + parseFloat(item.price || 0), 0).toFixed(2);
@@ -83,14 +90,14 @@ function Header() {
       </div>
       <div className="cart-profile">
         <Link to="/cart">
-          <img class="cart-icon" src="/cart.png" alt="Cart"/>  
+          <img className="cart-icon" src="/cart.png" alt="Cart"/>  
           <span>${totalAmount} ({itemCount} {itemCount === 1 ? 'item' : 'items'})</span>
         </Link>
         <div className="profile-dropdown-container">
-          <img class="profile-icon" src="/generic_avatar.png" alt="Profile" onClick={toggleDropdown} />
+          <img className="profile-icon" src="/generic_avatar.png" alt="Profile" onClick={toggleDropdown} />
           {dropdownVisible && (
             <div className="profile-dropdown">
-              <button className="sign-in">Sign In</button>
+              <button className="sign-in" onClick={toggleModal}>Sign In</button>
               <button onClick={() => navigate('/create-account')}>Create an Account</button>
               <button onClick={() => navigate('/manage-account')}>Manage Account</button>
               <button onClick={() => navigate('/digital-library')}>My Digital Library</button>
@@ -98,6 +105,7 @@ function Header() {
           )}
         </div>
       </div>
+      <SignInModal isOpen={isModalOpen} toggleModal={toggleModal} />
     </header>
   );
 }

@@ -1,0 +1,98 @@
+/* src/components/SignInModal.css */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #000;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+  position: relative;
+  text-align: center;
+  color: #fff;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  border: none;
+  cursor: pointer;
+  background: none;
+  transform: none;
+}
+
+.modal-content input[type="email"],
+.modal-content input[type="password"] {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #333;
+  color: #fff;
+}
+
+.modal-content .actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sign-in-button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #e0e0f8;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.create-account-button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #b0b0d8;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.modal-content a {
+  display: block;
+  text-align: center;
+  margin: 10px 0;
+  color: #999;
+  text-decoration: none;
+}
+
+.modal-content a.underline {
+  text-decoration: underline;
+}
+
+.modal-content .terms {
+  color: #666;
+}
+
+.close-icon {
+  width: 25px;
+  height: 25px;
+  position: relative;
+  left: -25px;
+}
