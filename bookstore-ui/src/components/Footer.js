@@ -12,10 +12,9 @@ const Footer = () => {
                         <Link to="/"><img src="/bookstorelogo.png" alt="Logo" /></Link>
                     </div>
                     <div className="social-icons">
-                    <img src="/x.png" alt="X Icon" />
-                    <img src="/insta.png" alt="Instagram Icon" />
-                    <img src="/youtube.png" alt="YouTube Icon" />
-
+                        <img src="/twitter.png" alt="X Icon" />
+                        <img src="/insta.png" alt="Instagram Icon" />
+                        <img src="/youtube.png" alt="YouTube Icon" />
                     </div>
                 </div>
 
@@ -37,6 +36,12 @@ const Footer = () => {
                         <li>Hours</li>
                         <li>News / Blog</li>
                         <li>Contact Us</li>
+                        <li className="dropdown">
+                            <select>
+                                <option value="en">English</option>
+                                <option value="sw">Swedish</option>
+                            </select>
+                        </li>
                     </ul>
                 </div>
             </div>
