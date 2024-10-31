@@ -5,15 +5,34 @@
 
 .book-list {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-top: 20px;
 }
 
 .book-card {
-  width: 30%;
+  flex: 1 1 20%;
+  max-width: 250px;
   background-color: #f9f9f9;
-  padding: 15px;
+  padding: 20px;
   border-radius: 10px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  height: 350px;
+}
+
+.book-info p {
+  text-align: center;
+}
+
+.book-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.book-actions .btn {
+  flex: 1;
+  margin: 0;
 }
