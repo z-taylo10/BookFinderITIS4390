@@ -12,6 +12,7 @@ import Genres from './components/Genres';
 import AccountsPage from './pages/AccountsPage';
 import Footer from './components/Footer';
 import BookDetailPage from './pages/BookDetailPage';
+import BookRecommendationsPage from './pages/BookRecommendationsPage';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -35,6 +36,7 @@ function App() {
             <Route path="/accounts" element={<AccountsPage />} />
             <Route path="/books/:bookId" element={<BookDetailPage />} /> {/* Book detail route */}
             <Route path="/genre/:genre" element={<GenrePage />} /> {/* Genre page route */}
+            <Route path="/recommendations" element={<BookRecommendationsPage />} />
           </Routes>
           <Footer />
         </div>
