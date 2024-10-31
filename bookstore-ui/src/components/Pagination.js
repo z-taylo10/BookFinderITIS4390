@@ -4,7 +4,7 @@ import '../stylesheets/Pagination.css';
 function Pagination({ currentPage, totalPages, onPageChange }) {
   return (
     <div className="pagination">
-      <img src="/path/to/left-arrow.png" alt="Left Arrow" onClick={() => onPageChange(currentPage - 1)} />
+      <img src="/left.png" alt="Left Arrow" onClick={() => onPageChange(currentPage - 1)} />
       <button className="page-link" onClick={() => onPageChange(1)} disabled={currentPage === 1}>
         Page 1
       </button>
@@ -20,7 +20,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
       <button className="page-link" onClick={() => onPageChange(totalPages)} disabled={currentPage === totalPages}>
         Last Page
       </button>
-      <img src="/path/to/right-arrow.png" alt="Right Arrow" onClick={() => onPageChange(currentPage + 1)} />
+      <img src="/right.png" alt="Right Arrow" onClick={() => onPageChange(currentPage + 1)} />
     </div>
   );
 }

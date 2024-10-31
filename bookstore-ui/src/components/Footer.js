@@ -12,20 +12,18 @@ const Footer = () => {
                         <Link to="/"><img src="/bookstorelogo.png" alt="Logo" /></Link>
                     </div>
                     <div className="social-icons">
-                        {/* Replace with actual icons or SVGs */}
-                        <span>📘</span> {/* Facebook Icon */}
-                        <span>🐦</span> {/* Twitter Icon */}
-                        <span>📸</span> {/* Instagram Icon */}
-                        <span>📺</span> {/* YouTube Icon */}
+                    <img src="/x.png" alt="X Icon" />
+                    <img src="/insta.png" alt="Instagram Icon" />
+                    <img src="/youtube.png" alt="YouTube Icon" />
+
                     </div>
                 </div>
 
                 <div className="footer-section">
                     <h4>Explore</h4>
                     <ul>
-                        <li>Genres</li>
-                        <li>Recommended</li>
-                        <li>Popular Books</li>
+                        <li><Link to="/genres">Genres</Link></li>
+                        <li><Link to="/recommendations">Recommended</Link></li>
                         <li>Non-Book Items</li>
                         <li>Sales</li>
                     </ul>
