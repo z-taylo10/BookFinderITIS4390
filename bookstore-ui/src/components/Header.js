@@ -66,22 +66,28 @@ function Header() {
           </div>
         </div>
       </div>
-      <form className="search-bar" onSubmit={handleSearch}>
+      <div className="search-bar">
+        <img
+          src="/search.png"
+          alt="Search Icon"
+          className="search-icon"
+          onClick={handleSearch}
+          style={{ cursor: 'pointer' }}
+        />
         <input
           type="text"
           placeholder="Search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button type="submit">Search</button>
-      </form>
+      </div>
       <div className="cart-profile">
         <Link to="/cart">
-          <img src="/dummy-cart.png" alt="Cart" />
+          <img class="cart-icon" src="/cart.png" alt="Cart"/>  
           <span>${totalAmount} ({itemCount} {itemCount === 1 ? 'item' : 'items'})</span>
         </Link>
         <div className="profile-dropdown-container">
-          <img src="/generic_avatar.png" alt="Profile" onClick={toggleDropdown} />
+          <img class="profile-icon" src="/generic_avatar.png" alt="Profile" onClick={toggleDropdown} />
           {dropdownVisible && (
             <div className="profile-dropdown">
               <button className="sign-in">Sign In</button>
