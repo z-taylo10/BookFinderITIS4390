@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../stylesheets/AccountsPage.css';
+import { AuthContext } from '../context/AuthContext';
 
 function AccountsPage() {
+  const { signOut } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    signOut();
+    navigate('/');
+  };
+
   return (
     <div className="accounts-page">
       <div className="account-header">
@@ -13,7 +23,7 @@ function AccountsPage() {
             <p>PHONE NUMBER:</p>
           </div>
         </div>
-        <button className="logout-button">LOG OUT</button>
+        <button className="logout-button" onClick={handleLogout}>LOG OUT</button>
       </div>
       <div className="account-content">
         <div className="left-column">

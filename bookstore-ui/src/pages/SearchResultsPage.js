@@ -62,8 +62,11 @@ function SearchResultsPage() {
   return (
     <div>
       <h2>Search Results for "{currentQuery}"</h2>
-      <div className="pagination-sort-container">
-        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+      <div className="three-column-layout">
+        <div className="empty-column"></div>
+        <div className="pagination-container">
+          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+        </div>
         <div className="sort-dropdown">
           <label htmlFor="sort">Sort by: </label>
           <select id="sort" value={sortOption} onChange={(e) => setSortOption(e.target.value)}>

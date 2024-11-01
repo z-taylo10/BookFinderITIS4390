@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../stylesheets/SignInModal.css';
 import CreateAccountModal from './CreateAccountModal';
+import { AuthContext } from '../context/AuthContext';
 
 function SignInModal({ isOpen, toggleModal }) {
   const navigate = useNavigate();
   const [isCreateAccountOpen, setIsCreateAccountOpen] = useState(false);
+  const { signIn } = useContext(AuthContext);
 
   const closeAllModals = () => {
     toggleModal();
@@ -19,6 +21,7 @@ function SignInModal({ isOpen, toggleModal }) {
     const password = document.querySelector('input[type="password"]').value;
 
     if (email && password) {
+      signIn();
       toggleModal();
       navigate('/accounts');
     } else {

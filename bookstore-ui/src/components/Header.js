@@ -1,6 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
+import { AuthContext } from '../context/AuthContext';
 import { mainGenres } from './Genres';
 import SignInModal from './SignInModal';
 import CreateAccountModal from './CreateAccountModal';
@@ -13,6 +14,8 @@ function Header() {
   const [isCreateAccountModalOpen, setIsCreateAccountModalOpen] = useState(false);
   const navigate = useNavigate();
   const { cart } = useContext(CartContext);
+  const { isAuthenticated, signOut } = useContext(AuthContext);
+  const dropdownRef = useRef(null);
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -22,6 +25,19 @@ function Header() {
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
   };
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setDropdownVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const toggleSignInModal = () => {
     setIsSignInModalOpen(!isSignInModalOpen);
@@ -93,6 +109,7 @@ function Header() {
           placeholder="Search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          onKeyPress={(e) => e.key === 'Enter' && handleSearch(e)}
         />
       </div>
       <div className="cart-profile">
@@ -100,12 +117,18 @@ function Header() {
           <img className="cart-icon" src="/cart.png" alt="Cart"/>  
           <span>${totalAmount} ({itemCount} {itemCount === 1 ? 'item' : 'items'})</span>
         </Link>
-        <div className="profile-dropdown-container">
+        <div className="profile-dropdown-container" ref={dropdownRef}>
           <img className="profile-icon" src="/generic_avatar.png" alt="Profile" onClick={toggleDropdown} />
           {dropdownVisible && (
             <div className="profile-dropdown">
-              <button className="sign-in" onClick={toggleSignInModal}>Sign In</button>
-              <button onClick={toggleCreateAccountModal}>Create an Account</button>
+              {isAuthenticated ? (
+                <button onClick={signOut}>Log Out</button>
+              ) : (
+                <button className="sign-in" onClick={toggleSignInModal}>Sign In</button>
+              )}
+              {!isAuthenticated && (
+                <button onClick={toggleCreateAccountModal}>Create an Account</button>
+              )}
               <button onClick={() => navigate('/manage-account')}>Manage Account</button>
               <button onClick={() => navigate('/digital-library')}>My Digital Library</button>
             </div>

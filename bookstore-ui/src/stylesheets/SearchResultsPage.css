@@ -1,6 +1,9 @@
 .sort-dropdown {
-  margin: 20px;
-  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  transform: translateX(-40%);
+  margin-top: 22px;
 }
 
 .sort-dropdown select {
@@ -30,4 +33,39 @@
 
 .sort-dropdown label {
   margin-right: 10px;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.sort-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.three-column-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.empty-column {
+  /* This column is intentionally left empty */
+  color: transparent;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+}
+
+.sort-dropdown {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
