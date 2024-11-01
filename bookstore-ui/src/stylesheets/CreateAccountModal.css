@@ -1,4 +1,4 @@
-.modal {
+.modal1 {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,18 +11,18 @@
   z-index: 1000;
 }
 
-.modal-content {
+.modal-content1 {
   background-color: #000;
   padding: 20px;
   border-radius: 10px;
-  width: 350px;
+  width: 40%;
   max-width: 90%;
   position: relative;
   text-align: center;
   color: #fff;
 }
 
-.close {
+.close1 {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -33,7 +33,7 @@
   background: none;
 }
 
-.modal-content input {
+.modal-content1 input {
   width: 90%;
   padding: 10px;
   margin: 10px 0;
@@ -43,53 +43,62 @@
   color: #fff;
 }
 
-.modal-content input[type="email"],
-.modal-content input[type="password"] {
+.modal-content1 input[type="email"],
+.modal-content1 input[type="password"] {
   background-color: #d8c8f0;
   color: #fff;
 }
 
-.actions {
+.actions1 {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   margin: 10px 0;
   font-size: 0.8em;
-  transform: translateX(-10px);
+  transform: translateX(-15%);
 }
 
-.create-account-button,
-.cancel-button {
+.create-account-button1,
+.cancel-button1 {
   width: 48%;
   margin: 10px 1%;
 }
 
-.create-account-button {
+.create-account-button1 {
   background-color: #b0a0d8;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
   color: #fff;
+  padding: 15px 1%;
 }
 
-.cancel-button {
+.cancel-button1 {
   background-color: #333;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
   color: #fff;
-  padding: 10px 1%;
+  padding: 15px 1%;
 }
 
-.terms {
+.terms1 {
   color: #666;
   text-decoration: none;
 }
 
-.actions label {
-  transform: translateX(-5%);
+.actions1 label {
+  transform: translateX(-30%);
   white-space: nowrap;
   color:#616161;
 }
+
+.close-icon1 {
+    width: 25px;
+    height: 25px;
+    position: relative;
+    left: -25px;
+  }
+  
