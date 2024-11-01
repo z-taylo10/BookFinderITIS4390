@@ -1,8 +1,32 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../stylesheets/CreateAccountModal.css';
 
 function CreateAccountModal({ isOpen, closeAllModals }) {
+  const navigate = useNavigate();
+
   if (!isOpen) return null;
+
+  const handleCreateAccount = () => {
+    const firstName = document.querySelector('input[placeholder="First Name"]').value;
+    const lastName = document.querySelector('input[placeholder="Last Name"]').value;
+    const email = document.querySelector('input[placeholder="Email"]').value;
+    const password = document.querySelector('input[placeholder="Password"]').value;
+    const confirmPassword = document.querySelector('input[placeholder="Confirm Password"]').value;
+
+    if (!firstName || !lastName || !email || !password || !confirmPassword) {
+      alert('Please fill in all fields.');
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      alert('Passwords do not match.');
+      return;
+    }
+
+    closeAllModals();
+    navigate('/accounts');
+  };
 
   return (
     <div className="modal1">
@@ -20,7 +44,7 @@ function CreateAccountModal({ isOpen, closeAllModals }) {
           <input type="checkbox" id="offers" />
           <label htmlFor="offers">I would like to receive offers and promotional emails</label>
         </div>
-        <button className="create-account-button1">CREATE ACCOUNT</button>
+        <button className="create-account-button1" onClick={handleCreateAccount}>CREATE ACCOUNT</button>
         <button className="cancel-button1" onClick={closeAllModals}>CANCEL</button>
         <a href="/" className="terms1">Terms of Use & Privacy Policy</a>
       </div>

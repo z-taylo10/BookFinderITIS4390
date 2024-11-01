@@ -101,4 +101,11 @@
     position: relative;
     left: -25px;
   }
+
+@media (max-width: 768px) {
+    .modal-content1 {
+        width: 90%;
+        padding: 15px;
+    }
+}
   

@@ -104,3 +104,10 @@
 .create-account-button:hover {
   background-color: #a0a0c8; /* Lighter shade for hover */
 }
+
+@media (max-width: 768px) {
+    .modal-content {
+        width: 90%;
+        padding: 15px;
+    }
+}
