@@ -26,7 +26,7 @@ const LandingPage = () => {
       // Randomly select 5 books for each section
       const shuffledBooks = books.sort(() => 0.5 - Math.random());
       setTrendingBooks(shuffledBooks.slice(0, 5));
-      setMoreTitles(shuffledBooks.slice(5, 9)); // Different 5 books for "More Titles"
+      setMoreTitles(shuffledBooks.slice(5, 8)); // Different 5 books for "More Titles"
     } catch (error) {
       console.error('Failed to retrieve data:', error);
     }
