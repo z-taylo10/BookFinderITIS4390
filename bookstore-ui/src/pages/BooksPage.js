@@ -4,6 +4,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import BookCard from '../components/BookCard';
 import '../stylesheets/BooksPage.css';
+import { API_KEY } from '../config';
 
 const BooksPage = () => {
   const [books, setBooks] = useState([]);
@@ -18,6 +19,7 @@ const BooksPage = () => {
       q: `subject:${genre}`, // Filter by genre
       maxResults: 12,
       startIndex: (currentPage - 1) * 12,
+      key: API_KEY
     };
 
     try {

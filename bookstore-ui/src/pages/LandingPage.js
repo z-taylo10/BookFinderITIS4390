@@ -17,6 +17,7 @@ const LandingPage = () => {
     const params = {
       q: 'subject:Fiction', // Default genre for trending
       maxResults: 40, // Fetch more to allow random selection
+      key: 'AIzaSyD-Tmhd6vMaMMakBt2VY6Tk5SQ9CvCTS3I'
     };
 
     try {

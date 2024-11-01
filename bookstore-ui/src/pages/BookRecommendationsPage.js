@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext  } from 'react';
 import axios from 'axios';
 import { CartContext } from '../context/CartContext';
 import '../stylesheets/BookRecommendationsPage.css';
+import { API_KEY } from '../config';
 
 const BookRecommendationsPage = () => {
   const { addToCart } = useContext(CartContext);
@@ -11,7 +12,7 @@ const BookRecommendationsPage = () => {
 
   useEffect(() => {
     // Fetch only 5 books with the maxResults parameter
-    axios.get('https://www.googleapis.com/books/v1/volumes?q=Fiction&maxResults=5')
+    axios.get('https://www.googleapis.com/books/v1/volumes?q=Fiction&maxResults=5&key=' + API_KEY)
       .then(response => {
         const bookData = response.data.items.map(item => ({
           title: item.volumeInfo.title,

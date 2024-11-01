@@ -20,6 +20,7 @@ function SearchResultsPage() {
     const params = {
       q: searchQuery,
       maxResults: 40,
+      key: 'AIzaSyD-Tmhd6vMaMMakBt2VY6Tk5SQ9CvCTS3I'
     };
 
     try {

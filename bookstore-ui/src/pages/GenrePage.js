@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import BookList from '../components/BookList';
 import Pagination from '../components/Pagination';
 import axios from 'axios';
+import { API_KEY } from '../config';
 
 function GenrePage() {
   const { genre } = useParams();
@@ -21,6 +22,7 @@ function GenrePage() {
         q: `subject:${genre}`,
         maxResults: 12,
         startIndex: (currentPage - 1) * 12,
+        key: API_KEY
       };
 
       try {
