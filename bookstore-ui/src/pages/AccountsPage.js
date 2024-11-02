@@ -65,11 +65,23 @@ function AccountsPage() {
         </div>
         <div className="right-column">
           <div className="shipping-info">
-            <h4>Shipping Information <button>[+]</button></h4>
+            <div className="shipping-header">
+              <h4>Shipping Information</h4>
+              <div className="add-container">
+                <span className="add-text">ADD</span>
+                <img src="/add.png" alt="Add" className="add-icon" />
+              </div>
+            </div>
             <p>Details</p>
           </div>
           <div className="payment-method">
-            <h4>Payment Method <button>[+]</button></h4>
+            <div className="payment-header">
+              <h4>Payment Method</h4>
+              <div className="add-container">
+                <span className="add-text">ADD</span>
+                <img src="/add.png" alt="Add" className="add-icon" />
+              </div>
+            </div>
             <p>Details</p>
           </div>
         </div>

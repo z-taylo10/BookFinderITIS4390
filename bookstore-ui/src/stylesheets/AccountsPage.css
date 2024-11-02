@@ -127,3 +127,46 @@
     height: 16px;
     cursor: pointer;
   }
+  
+  .shipping-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .shipping-header h4 {
+    margin: 0;
+    text-align: left;
+    flex-grow: 1;
+  }
+  
+  .add-text {
+    color: #aaa; /* Soft gray color */
+    font-size: 12px; /* Adjust size as needed */
+    margin-right: 5px;
+  }
+  
+  .add-icon {
+    width: 16px; /* Adjust size as needed */
+    height: 16px;
+    cursor: pointer;
+  }
+  
+  .add-container {
+    display: flex;
+    align-items: center; /* Aligns items vertically */
+  }
+  
+  .payment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .payment-header h4 {
+    margin: 0;
+    text-align: left;
+    flex-grow: 1;
+  }
