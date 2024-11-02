@@ -21,6 +21,10 @@ function AccountsPage() {
     setIsExpanded(!isExpanded);
   };
 
+  const handleAddShipping = () => {
+    navigate('/address-book');
+  };
+
   return (
     <div className="accounts-page">
       <div className="account-header">
@@ -69,7 +73,7 @@ function AccountsPage() {
               <h4>Shipping Information</h4>
               <div className="add-container">
                 <span className="add-text">ADD</span>
-                <img src="/add.png" alt="Add" className="add-icon" />
+                <img src="/add.png" alt="Add" className="add-icon" onClick={handleAddShipping} />
               </div>
             </div>
             <p>Details</p>
