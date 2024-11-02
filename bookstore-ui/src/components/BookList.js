@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
+import { WishlistContext } from '../context/WishlistContext';
 import '../stylesheets/BookList.css';
 
 function BookList({ books }) {
   const { cart, addToCart, removeFromCart } = useContext(CartContext);
+  const { wishlist, addToWishlist, removeFromWishlist } = useContext(WishlistContext);
   const navigate = useNavigate();
 
   const calculateAveragePrice = () => {
@@ -29,6 +31,7 @@ function BookList({ books }) {
         const price = saleInfo.listPrice ? `${saleInfo.listPrice.amount} ${saleInfo.listPrice.currencyCode}` : `${averagePrice} USD`;
 
         const isInCart = cart.some(item => item.id === book.id);
+        const isInWishlist = wishlist.some(item => item.id === book.id);
 
         return (
           <div key={index} className="book-card-custom">
@@ -56,8 +59,18 @@ function BookList({ books }) {
               >
                 {isInCart ? 'Remove from Cart' : '🛒 Add to Cart'}
               </button>
-              <button className="button-custom wishlist-button-custom">
-                ❤️ Add to Wishlist
+              <button 
+                className="button-custom wishlist-button-custom"
+                onClick={() => {
+                  if (isInWishlist) {
+                    const itemIndex = wishlist.findIndex(item => item.id === book.id);
+                    removeFromWishlist(itemIndex);
+                  } else {
+                    addToWishlist({ id: book.id, title: info.title, authors: info.authors ? info.authors.join(', ') : 'N/A', price: saleInfo.listPrice?.amount || averagePrice, thumbnail });
+                  }
+                }}
+              >
+                {isInWishlist ? 'Remove from Wishlist' : '❤️ Add to Wishlist'}
               </button>
             </div>
           </div>

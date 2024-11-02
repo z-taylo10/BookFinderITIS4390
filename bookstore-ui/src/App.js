@@ -14,6 +14,7 @@ import Footer from './components/Footer';
 import BookDetailPage from './pages/BookDetailPage';
 import BookRecommendationsPage from './pages/BookRecommendationsPage';
 import Shipping from './components/Shipping';
+import { WishlistProvider } from './context/WishlistContext';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -25,24 +26,26 @@ function App() {
 
   return (
     <CartProvider>
-      <Router>
-        <div className="App">
-          <Header />
-          <Routes>
-            <Route path="/" element={<HomePage onSearch={setSearchQuery} />} />
-            <Route path="/search" element={<SearchResultsPage query={searchQuery} />} />
-            <Route path="/genres" element={<Genres onGenreClick={handleGenreClick} />} />
-            <Route path="/genre" element={<GenrePage genre={selectedGenre} />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/accounts" element={<AccountsPage />} />
-            <Route path="/books/:bookId" element={<BookDetailPage />} /> {/* Book detail route */}
-            <Route path="/genre/:genre" element={<GenrePage />} /> {/* Genre page route */}
-            <Route path="/recommendations" element={<BookRecommendationsPage />} />
-            <Route path="/shipping" component={Shipping} />
-          </Routes>
-          <Footer />
-        </div>
-      </Router>
+      <WishlistProvider>
+        <Router>
+          <div className="App">
+            <Header />
+            <Routes>
+              <Route path="/" element={<HomePage onSearch={setSearchQuery} />} />
+              <Route path="/search" element={<SearchResultsPage query={searchQuery} />} />
+              <Route path="/genres" element={<Genres onGenreClick={handleGenreClick} />} />
+              <Route path="/genre" element={<GenrePage genre={selectedGenre} />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/accounts" element={<AccountsPage />} />
+              <Route path="/books/:bookId" element={<BookDetailPage />} /> {/* Book detail route */}
+              <Route path="/genre/:genre" element={<GenrePage />} /> {/* Genre page route */}
+              <Route path="/recommendations" element={<BookRecommendationsPage />} />
+              <Route path="/shipping" component={Shipping} />
+            </Routes>
+            <Footer />
+          </div>
+        </Router>
+      </WishlistProvider>
     </CartProvider>
   );
 }

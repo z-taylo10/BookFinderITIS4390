@@ -64,7 +64,66 @@
   
   .wishlist-item, .order-item {
     display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-right: 10px;
+    border-bottom: 1px solid #686868;
+  }
+  
+  .wishlist-item span {
+    flex-grow: 1;
+    text-align: left;
+  }
+  
+  .accounts-page .add-to-cart-button {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    margin-right: 10px;
+  }
+  
+  .accounts-page .cart-icon {
+    width: 20px; /* Adjust size as needed */
+    height: 22px;
+    margin-right: 5px; /* Increase margin for spacing */
+  }
+  
+  .accounts-page .add-text {
+    color: #aaa; /* Soft gray color */
+    font-size: 12px; /* Adjust size as needed */
+  }
+  
+  .accounts-page .remove-icon {
+    width: 16px; /* Adjust size as needed */
+    height: 16px;
+    cursor: pointer;
+  }
+  
+  .remove-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+  }
+  
+  .wishlist-header {
+    display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
-  } 
+  }
+  
+  .wishlist-header h4 {
+    margin: 0;
+    text-align: left;
+  }
+  
+  .expand-icon {
+    width: 16px; /* Adjust size as needed */
+    height: 16px;
+    cursor: pointer;
+  }
