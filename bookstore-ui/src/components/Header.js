@@ -122,15 +122,27 @@ function Header() {
           {dropdownVisible && (
             <div className="profile-dropdown">
               {isAuthenticated ? (
-                <button onClick={signOut}>Log Out</button>
+                <button onClick={() => { signOut(); navigate('/'); }}>Log Out</button>
               ) : (
                 <button className="sign-in" onClick={toggleSignInModal}>Sign In</button>
               )}
               {!isAuthenticated && (
                 <button onClick={toggleCreateAccountModal}>Create an Account</button>
               )}
-              <button onClick={() => navigate('/manage-account')}>Manage Account</button>
-              <button onClick={() => navigate('/digital-library')}>My Digital Library</button>
+              <button onClick={() => {
+                if (isAuthenticated) {
+                  navigate('/accounts');
+                } else {
+                  toggleSignInModal();
+                }
+              }}>Manage Account</button>
+              <button onClick={() => {
+                if (isAuthenticated) {
+                  navigate('/accounts');
+                } else {
+                  toggleSignInModal();
+                }
+              }}>My Digital Library</button>
             </div>
           )}
         </div>

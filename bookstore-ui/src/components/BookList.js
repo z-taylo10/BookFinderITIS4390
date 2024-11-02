@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 import '../stylesheets/BookList.css';
 
 function BookList({ books }) {
   const { addToCart } = useContext(CartContext);
+  const navigate = useNavigate();
 
   const calculateAveragePrice = () => {
     const prices = books
@@ -33,7 +35,10 @@ function BookList({ books }) {
             <p><strong>Authors:</strong> {info.authors ? info.authors.join(', ') : 'N/A'}</p>
             <p><strong>Price:</strong> {price}</p>
             <div className="button-container">
-              <button className="button-custom details-button-custom">
+              <button 
+                className="button-custom details-button-custom"
+                onClick={() => navigate(`/books/${book.id}`)}
+              >
                 View Details
               </button>
               <button 
