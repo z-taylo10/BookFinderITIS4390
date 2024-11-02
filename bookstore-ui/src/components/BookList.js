@@ -4,7 +4,7 @@ import { CartContext } from '../context/CartContext';
 import '../stylesheets/BookList.css';
 
 function BookList({ books }) {
-  const { addToCart } = useContext(CartContext);
+  const { cart, addToCart, removeFromCart } = useContext(CartContext);
   const navigate = useNavigate();
 
   const calculateAveragePrice = () => {
@@ -28,6 +28,8 @@ function BookList({ books }) {
         const thumbnail = info.imageLinks ? info.imageLinks.thumbnail : '/no-thumbnail.png';
         const price = saleInfo.listPrice ? `${saleInfo.listPrice.amount} ${saleInfo.listPrice.currencyCode}` : `${averagePrice} USD`;
 
+        const isInCart = cart.some(item => item.id === book.id);
+
         return (
           <div key={index} className="book-card-custom">
             <img src={thumbnail} alt={`${info.title} cover`} />
@@ -43,9 +45,16 @@ function BookList({ books }) {
               </button>
               <button 
                 className="button-custom cart-button-custom" 
-                onClick={() => addToCart({ title: info.title, authors: info.authors ? info.authors.join(', ') : 'N/A', price: saleInfo.listPrice?.amount || averagePrice, thumbnail })}
+                onClick={() => {
+                  if (isInCart) {
+                    const itemIndex = cart.findIndex(item => item.id === book.id);
+                    removeFromCart(itemIndex);
+                  } else {
+                    addToCart({ id: book.id, title: info.title, authors: info.authors ? info.authors.join(', ') : 'N/A', price: saleInfo.listPrice?.amount || averagePrice, thumbnail });
+                  }
+                }}
               >
-                🛒 Add to Cart
+                {isInCart ? 'Remove from Cart' : '🛒 Add to Cart'}
               </button>
               <button className="button-custom wishlist-button-custom">
                 ❤️ Add to Wishlist
