@@ -1,0 +1,64 @@
+.book-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}
+
+.book-card-custom {
+  flex: 1 1 200px;
+  max-width: 220px;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.book-card-custom img {
+  width: 150px;
+  height: 200px;
+  object-fit: contain;
+  border-radius: 5px;
+  margin: 0 auto;
+  display: block;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: auto;
+}
+
+.button-custom {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.cart-button-custom {
+  background-color: #f0f0f0;
+  border: none;
+}
+
+.wishlist-button-custom {
+  background-color: #ffe6e6;
+  border: 1px solid red;
+  color: red;
+}
+
+.details-button-custom {
+  background-color: #e0f7ff;
+  border: none;
+  color: #007bff;
+}
