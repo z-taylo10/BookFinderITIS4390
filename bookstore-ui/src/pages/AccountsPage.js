@@ -4,11 +4,13 @@ import '../stylesheets/AccountsPage.css';
 import { AuthContext } from '../context/AuthContext';
 import { WishlistContext } from '../context/WishlistContext';
 import { CartContext } from '../context/CartContext';
+import { AddressContext } from '../context/AddressContext';
 
 function AccountsPage() {
   const { signOut } = useContext(AuthContext);
   const { wishlist, removeFromWishlist } = useContext(WishlistContext);
   const { addToCart } = useContext(CartContext);
+  const { address } = useContext(AddressContext);
   const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -76,7 +78,10 @@ function AccountsPage() {
                 <img src="/add.png" alt="Add" className="add-icon" onClick={handleAddShipping} />
               </div>
             </div>
-            <p>Details</p>
+            <p>{address.fullName}</p>
+            <p>{address.address}</p>
+            <p>{address.city}, {address.state} {address.zipCode}</p>
+            <p>{address.phoneNumber}</p>
           </div>
           <div className="payment-method">
             <div className="payment-header">
