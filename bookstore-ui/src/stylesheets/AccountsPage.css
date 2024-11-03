@@ -196,3 +196,11 @@
     height: 16px;
     cursor: pointer;
   }
+  
+  .payment-details {
+    background-color: #e0e0e0; /* Darker background */
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+    position: relative;
+  }

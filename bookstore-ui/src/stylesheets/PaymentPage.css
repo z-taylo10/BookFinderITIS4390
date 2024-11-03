@@ -1,0 +1,72 @@
+.payment-page {
+  padding: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+h2 {
+  text-align: center;
+}
+
+.subheading {
+  text-align: center;
+  font-weight: normal;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #e0e0f8;
+}
+
+.expiration {
+  display: flex;
+  gap: 10px;
+}
+
+.expiration input {
+  flex: 1;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.save-button, .cancel-button {
+  flex: 1;
+  margin: 5px;
+  background-color: #d0a0ff;
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.cancel-button {
+  background-color: #ccc;
+  color: black;
+  font-weight: bold;
+}
+
+.card-details {
+  display: flex;
+  gap: 10px;
+}
+
+.card-details input[name="cardNumber"] {
+  flex: 3;
+}
+
+.card-details input[name="securityCode"] {
+  flex: 1;
+}

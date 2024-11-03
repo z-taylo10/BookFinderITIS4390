@@ -5,6 +5,7 @@ import { AuthContext } from '../context/AuthContext';
 import { WishlistContext } from '../context/WishlistContext';
 import { CartContext } from '../context/CartContext';
 import { AddressContext } from '../context/AddressContext';
+import { PaymentContext } from '../context/PaymentContext';
 
 const formatPhoneNumber = (phoneNumber) => {
   if (!phoneNumber) return '';
@@ -18,6 +19,7 @@ function AccountsPage() {
   const { wishlist, removeFromWishlist } = useContext(WishlistContext);
   const { addToCart } = useContext(CartContext);
   const { address, setAddress } = useContext(AddressContext);
+  const { payment, setPayment } = useContext(PaymentContext);
   const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -42,6 +44,16 @@ function AccountsPage() {
       state: '',
       zipCode: '',
       phoneNumber: '',
+    });
+  };
+
+  const handleRemovePayment = () => {
+    setPayment({
+      cardNumber: '',
+      nameOnCard: '',
+      expirationMonth: '',
+      expirationYear: '',
+      securityCode: '',
     });
   };
 
@@ -111,12 +123,19 @@ function AccountsPage() {
           <div className="payment-method">
             <div className="payment-header">
               <h4>Payment Method</h4>
-              <div className="add-container">
-                <span className="add-text">ADD</span>
-                <img src="/add.png" alt="Add" className="add-icon" />
+              <div className="add-container" onClick={() => navigate('/payment')}>
+                <span className="add-text">{payment.cardNumber ? 'EDIT' : 'ADD'}</span>
+                <img src={payment.cardNumber ? '/edit.png' : '/add.png'} alt="Add/Edit" className="add-icon" />
               </div>
             </div>
-            <p>Details</p>
+            {payment.cardNumber && (
+              <div className="payment-details">
+                <p>Card Number: **** **** **** {payment.cardNumber.slice(-4)}</p>
+                <p>Name on Card: {payment.nameOnCard}</p>
+                <p>Expires: {payment.expirationMonth}/{payment.expirationYear}</p>
+                <img src="/remove.png" alt="Remove" className="remove-icon" onClick={handleRemovePayment} />
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -125,3 +144,4 @@ function AccountsPage() {
 }
 
 export default AccountsPage;
+
