@@ -83,7 +83,7 @@ function AccountsPage() {
               </div>
               {(isExpanded ? wishlist : wishlist.slice(0, 2)).map((item, index) => (
                 <div key={index} className="wishlist-item">
-                  <span>{item.title}: {item.authors}, ${item.price}</span>
+                  <span>{item.title}: {item.authors}, ${parseFloat(item.price).toFixed(2)}</span>
                   <button onClick={() => addToCart(item)} className="accounts-page add-to-cart-button">
                     <img src="/blackcart.png" alt="Add to Cart" className="cart-icon" />
                     <span className="add-text">ADD</span>
