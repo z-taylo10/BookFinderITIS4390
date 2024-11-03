@@ -43,14 +43,14 @@ function AddressBookPage() {
       <h2>Manage Address Book</h2>
       <h3 className="subheading">Add a New Shipping Address</h3>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="fullName" placeholder="Full Name" value={formData.fullName} onChange={handleChange} required />
-        <input type="text" name="address" placeholder="Address" value={formData.address} onChange={handleChange} required />
-        <input type="text" name="city" placeholder="City" value={formData.city} onChange={handleChange} required />
+        <input className="address-input" type="text" name="fullName" placeholder="Full Name" value={formData.fullName} onChange={handleChange} required />
+        <input className="address-input" type="text" name="address" placeholder="Address" value={formData.address} onChange={handleChange} required />
+        <input className="address-input" type="text" name="city" placeholder="City" value={formData.city} onChange={handleChange} required />
         <div className="state-zip">
-          <input type="text" name="state" placeholder="State" value={formData.state} onChange={handleChange} required />
-          <input type="text" name="zipCode" placeholder="Zip Code" value={formData.zipCode} onChange={handleChange} required pattern="\d*" />
+          <input className="address-input" type="text" name="state" placeholder="State" value={formData.state} onChange={handleChange} required />
+          <input className="address-input" type="text" name="zipCode" placeholder="Zip Code" value={formData.zipCode} onChange={handleChange} required pattern="\d*" />
         </div>
-        <input type="text" name="phoneNumber" placeholder="Phone Number" value={formData.phoneNumber} onChange={handleChange} required pattern="\d*" maxLength="10" />
+        <input className="address-input" type="text" name="phoneNumber" placeholder="Phone Number" value={formData.phoneNumber} onChange={handleChange} required pattern="\d*" maxLength="10" />
         <div className="buttons">
           <button type="submit" className="save-button">SAVE</button>
           <button type="button" className="cancel-button" onClick={handleCancel}>CANCEL</button>

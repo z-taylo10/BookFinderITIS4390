@@ -64,13 +64,13 @@ function PaymentPage() {
       <h3 className="subheading">Add a New Payment Method</h3>
       <form onSubmit={handleSubmit}>
         <div className="card-details">
-          <input type="text" name="cardNumber" placeholder="Card Number" value={formData.cardNumber} onChange={handleChange} required pattern="\d*" maxLength="16" />
-          <input type="text" name="securityCode" placeholder="SRC" value={formData.securityCode} onChange={handleChange} required pattern="\d*" maxLength="3" />
+          <input className="payment-input" type="text" name="cardNumber" placeholder="Card Number" value={formData.cardNumber} onChange={handleChange} required pattern="\d*" maxLength="16" />
+          <input className="payment-input" type="text" name="securityCode" placeholder="SRC" value={formData.securityCode} onChange={handleChange} required pattern="\d*" maxLength="3" />
         </div>
-        <input type="text" name="nameOnCard" placeholder="Name on Card" value={formData.nameOnCard} onChange={handleChange} required pattern="[a-zA-Z\s]*" />
+        <input className="payment-input" type="text" name="nameOnCard" placeholder="Name on Card" value={formData.nameOnCard} onChange={handleChange} required pattern="[a-zA-Z\s]*" />
         <div className="expiration">
-          <input type="text" name="expirationMonth" placeholder="Expiration Month" value={formData.expirationMonth} onChange={handleChange} required pattern="\d*" maxLength="2" />
-          <input type="text" name="expirationYear" placeholder="Expiration Year" value={formData.expirationYear} onChange={handleChange} required pattern="\d*" maxLength="4" />
+          <input className="payment-input" type="text" name="expirationMonth" placeholder="Expiration Month" value={formData.expirationMonth} onChange={handleChange} required pattern="\d*" maxLength="2" />
+          <input className="payment-input" type="text" name="expirationYear" placeholder="Expiration Year" value={formData.expirationYear} onChange={handleChange} required pattern="\d*" maxLength="4" />
         </div>
         <div className="buttons">
           <button type="submit" className="save-button">SAVE</button>

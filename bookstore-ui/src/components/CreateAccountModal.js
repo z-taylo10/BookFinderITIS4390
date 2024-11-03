@@ -2,10 +2,12 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../stylesheets/CreateAccountModal.css';
 import { AuthContext } from '../context/AuthContext';
+import { UserContext } from '../context/UserContext';
 
 function CreateAccountModal({ isOpen, closeAllModals }) {
   const navigate = useNavigate();
   const { signIn } = useContext(AuthContext);
+  const { setUser } = useContext(UserContext);
 
   if (!isOpen) return null;
 
@@ -26,6 +28,7 @@ function CreateAccountModal({ isOpen, closeAllModals }) {
       return;
     }
 
+    setUser({ firstName, lastName, email });
     signIn();
     closeAllModals();
     navigate('/accounts');

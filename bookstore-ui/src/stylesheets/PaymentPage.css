@@ -18,14 +18,6 @@ form {
   flex-direction: column;
 }
 
-input {
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #e0e0f8;
-}
-
 .expiration {
   display: flex;
   gap: 10px;
@@ -69,4 +61,13 @@ input {
 
 .card-details input[name="securityCode"] {
   flex: 1;
+}
+
+.payment-input {
+  /* Add your styles here */
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #e0e0f8;
 }

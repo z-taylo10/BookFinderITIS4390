@@ -189,7 +189,6 @@
   }
   
   .remove-icon {
-    position: absolute;
     right: 10px;
     top: 10px;
     width: 16px;
@@ -203,4 +202,22 @@
     border-radius: 4px;
     margin-top: 10px;
     position: relative;
+  }
+  
+  .shipping-remove-icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+  
+  .payment-remove-icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
   }
