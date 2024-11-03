@@ -6,11 +6,18 @@ import { WishlistContext } from '../context/WishlistContext';
 import { CartContext } from '../context/CartContext';
 import { AddressContext } from '../context/AddressContext';
 
+const formatPhoneNumber = (phoneNumber) => {
+  if (!phoneNumber) return '';
+  const cleaned = ('' + phoneNumber).replace(/\D/g, '');
+  const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+  return match ? `${match[1]}-${match[2]}-${match[3]}` : phoneNumber;
+};
+
 function AccountsPage() {
   const { signOut } = useContext(AuthContext);
   const { wishlist, removeFromWishlist } = useContext(WishlistContext);
   const { addToCart } = useContext(CartContext);
-  const { address } = useContext(AddressContext);
+  const { address, setAddress } = useContext(AddressContext);
   const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -25,6 +32,17 @@ function AccountsPage() {
 
   const handleAddShipping = () => {
     navigate('/address-book');
+  };
+
+  const handleRemoveAddress = () => {
+    setAddress({
+      fullName: '',
+      address: '',
+      city: '',
+      state: '',
+      zipCode: '',
+      phoneNumber: '',
+    });
   };
 
   return (
@@ -73,15 +91,22 @@ function AccountsPage() {
           <div className="shipping-info">
             <div className="shipping-header">
               <h4>Shipping Information</h4>
-              <div className="add-container">
-                <span className="add-text">ADD</span>
-                <img src="/add.png" alt="Add" className="add-icon" onClick={handleAddShipping} />
+              <div className="add-container" onClick={handleAddShipping}>
+                <span className="add-text">{address.fullName ? 'EDIT' : 'ADD'}</span>
+                <img src={address.fullName ? '/edit.png' : '/add.png'} alt="Add/Edit" className="add-icon" />
               </div>
             </div>
-            <p>{address.fullName}</p>
-            <p>{address.address}</p>
-            <p>{address.city}, {address.state} {address.zipCode}</p>
-            <p>{address.phoneNumber}</p>
+            {(address.fullName || address.address || address.city || address.state || address.zipCode || address.phoneNumber) && (
+              <div className="shipping-details">
+                {address.fullName && <p>{address.fullName}</p>}
+                {address.address && <p>{address.address}</p>}
+                {(address.city || address.state || address.zipCode) && (
+                  <p>{address.city}, {address.state} {address.zipCode}</p>
+                )}
+                {address.phoneNumber && <p>{formatPhoneNumber(address.phoneNumber)}</p>}
+                <img src="/remove.png" alt="Remove" className="remove-icon" onClick={handleRemoveAddress} />
+              </div>
+            )}
           </div>
           <div className="payment-method">
             <div className="payment-header">

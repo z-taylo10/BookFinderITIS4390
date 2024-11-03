@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AddressContext } from '../context/AddressContext';
 import '../stylesheets/AddressBookPage.css';
 
 function AddressBookPage() {
-  const { setAddress } = useContext(AddressContext);
+  const { address, setAddress } = useContext(AddressContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: '',
@@ -14,6 +14,10 @@ function AddressBookPage() {
     zipCode: '',
     phoneNumber: '',
   });
+
+  useEffect(() => {
+    setFormData(address);
+  }, [address]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -39,14 +43,14 @@ function AddressBookPage() {
       <h2>Manage Address Book</h2>
       <h3 className="subheading">Add a New Shipping Address</h3>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="fullName" placeholder="Full Name" onChange={handleChange} required />
-        <input type="text" name="address" placeholder="Address" onChange={handleChange} required />
-        <input type="text" name="city" placeholder="City" onChange={handleChange} required />
+        <input type="text" name="fullName" placeholder="Full Name" value={formData.fullName} onChange={handleChange} required />
+        <input type="text" name="address" placeholder="Address" value={formData.address} onChange={handleChange} required />
+        <input type="text" name="city" placeholder="City" value={formData.city} onChange={handleChange} required />
         <div className="state-zip">
-          <input type="text" name="state" placeholder="State" onChange={handleChange} required />
-          <input type="text" name="zipCode" placeholder="Zip Code" onChange={handleChange} required />
+          <input type="text" name="state" placeholder="State" value={formData.state} onChange={handleChange} required />
+          <input type="text" name="zipCode" placeholder="Zip Code" value={formData.zipCode} onChange={handleChange} required pattern="\d*" />
         </div>
-        <input type="text" name="phoneNumber" placeholder="Phone Number" onChange={handleChange} required />
+        <input type="text" name="phoneNumber" placeholder="Phone Number" value={formData.phoneNumber} onChange={handleChange} required pattern="\d*" maxLength="10" />
         <div className="buttons">
           <button type="submit" className="save-button">SAVE</button>
           <button type="button" className="cancel-button" onClick={handleCancel}>CANCEL</button>
