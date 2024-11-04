@@ -15,12 +15,21 @@ function SearchResultsPage() {
   const [currentQuery, setCurrentQuery] = useState(query);
   const [sortOption, setSortOption] = useState('popular');
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const baseUrl = 'https://www.googleapis.com/books/v1/volumes';
   const apiKey = 'AIzaSyD-Tmhd6vMaMMakBt2VY6Tk5SQ9CvCTS3I';
 
   // Fetch books based on the search query
   const fetchBooks = useCallback(async (searchQuery) => {
+    if (!searchQuery.trim()) {
+      setError('Please enter a search query.');
+      setBooks([]);
+      setSuggestedBooks([]);
+      return;
+    }
+
+    setLoading(true); // Start loading
     setCurrentQuery(searchQuery);
     const params = {
       q: searchQuery,
@@ -65,6 +74,8 @@ function SearchResultsPage() {
     } catch (error) {
       setError('Failed to retrieve data.');
       console.error('Failed to retrieve data:', error);
+    } finally {
+      setLoading(false); // End loading
     }
   }, [currentPage, sortOption]);
 
@@ -91,7 +102,9 @@ function SearchResultsPage() {
 
   return (
     <div>
-      {error ? (
+      {loading ? (
+        <div className="loading-message">Loading...</div>
+      ) : error ? (
         <div className="error-message">{error}</div>
       ) : books.length === 0 ? (
         <div className="no-books-message">
