@@ -6,7 +6,7 @@ import { CartContext } from '../context/CartContext';
 import '../stylesheets/PaymentInfoPage.css';
 
 function PaymentInfoPage() {
-  const { payment, setPayment, tempPayment, setTempPayment } = useContext(PaymentContext);
+  const { payment, setTempPayment } = useContext(PaymentContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     cardNumber: '',
@@ -37,7 +37,13 @@ function PaymentInfoPage() {
   };
 
   const handleBack = () => {
-    if (address.fullName) {
+    console.log('isPickup:', isPickup);
+    console.log('address:', address);
+    console.log('address.fullName:', address.fullName);
+
+    if (isPickup) {
+      navigate('/cart');
+    } else if (address.fullName) {
       navigate('/cart');
     } else {
       navigate('/shipping-info');

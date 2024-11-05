@@ -8,12 +8,11 @@ import SignInModal from './SignInModal';
 import '../stylesheets/CartPage.css';
 
 function Cart() {
-  const { cart, removeFromCart } = useContext(CartContext);
+  const { cart, removeFromCart, isPickup, togglePickup } = useContext(CartContext);
   const { isAuthenticated } = useContext(AuthContext);
   const { address } = useContext(AddressContext);
   const { payment } = useContext(PaymentContext);
   const navigate = useNavigate();
-  const [isPickup, setIsPickup] = useState(false);
   const [isShipping, setIsShipping] = useState(false);
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
 
@@ -23,13 +22,13 @@ function Cart() {
   const totalWithTaxAndShipping = (totalPrice + tax + shipping).toFixed(2);
 
   const handlePickupToggle = () => {
-    setIsPickup(!isPickup);
+    togglePickup();
     setIsShipping(false);
   };
 
   const handleShippingToggle = () => {
     setIsShipping(!isShipping);
-    setIsPickup(false);
+    togglePickup(false);
   };
 
   const toggleSignInModal = () => {
@@ -55,6 +54,8 @@ function Cart() {
       }
     }
   };
+
+  console.log('isPickup in Cart:', isPickup);
 
   return (
     <div className="cart-page">
@@ -84,21 +85,12 @@ function Cart() {
           <button onClick={handleShippingToggle} className={`ship-button ${isShipping ? 'active' : ''}`}>
             Ship to You
           </button>
-          {isShipping ? (
-            <button
-              onClick={() => isAuthenticated ? handlePickupToggle() : toggleSignInModal()}
-              className={`pickup-button ${isPickup ? 'active' : ''}`}
-            >
-              {isAuthenticated ? 'Pick up at Store' : 'Log In'}
-            </button>
-          ) : (
-            <button
-              onClick={handlePickupToggle}
-              className={`pickup-button ${isPickup ? 'active' : ''}`}
-            >
-              Pick up at Store
-            </button>
-          )}
+          <button
+            onClick={handlePickupToggle}
+            className={`pickup-button ${isPickup && !isShipping ? 'active' : ''}`}
+          >
+            Pick up at Store
+          </button>
           {(isPickup || isShipping) && (
             <span className="cart-tax">Tax 8%: ${tax.toFixed(2)}</span>
           )}
@@ -123,5 +115,6 @@ function Cart() {
     </div>
   );
 }
+
 
 export default Cart;

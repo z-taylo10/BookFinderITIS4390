@@ -4,10 +4,10 @@ export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
+  const [isPickup, setIsPickup] = useState(false);
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem('cart'));
-    console.log('Loaded cart from localStorage:', storedCart);
     if (storedCart && Array.isArray(storedCart)) {
       setCart(storedCart);
     }
@@ -18,17 +18,19 @@ export const CartProvider = ({ children }) => {
   }, [cart]);
 
   const addToCart = (item) => {
-    console.log('Adding to cart:', item);
     setCart((prevCart) => [...prevCart, item]);
   };
 
   const removeFromCart = (index) => {
-    console.log('Removing from cart at index:', index);
     setCart((prevCart) => prevCart.filter((_, i) => i !== index));
   };
 
+  const togglePickup = () => {
+    setIsPickup(!isPickup);
+  };
+
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, isPickup, togglePickup }}>
       {children}
     </CartContext.Provider>
   );

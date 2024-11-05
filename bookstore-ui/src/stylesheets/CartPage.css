@@ -82,6 +82,11 @@
   color: white;
 }
 
+.pickup-button.active, .ship-button.active {
+  background-color: #d3d3d3;
+  color: #333;
+}
+
 .cart-subtotal {
   background-color: #d3d3d3;
   padding: 10px;
@@ -93,11 +98,6 @@
   font-size: 1.2em;
   font-weight: bold;
   position: relative;
-}
-
-.pickup-button.active {
-  background-color: #d3d3d3;
-  color: #333;
 }
 
 .cart-tax {
