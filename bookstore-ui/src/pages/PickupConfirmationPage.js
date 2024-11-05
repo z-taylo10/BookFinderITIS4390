@@ -1,19 +1,13 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { PaymentContext } from '../context/PaymentContext';
 import { CartContext } from '../context/CartContext';
 import '../stylesheets/PickupConfirmationPage.css';
 
 function PickupConfirmationPage() {
-  const { payment, tempPayment, setTempPayment } = useContext(PaymentContext);
+  const { payment, tempPayment } = useContext(PaymentContext);
   const { cart } = useContext(CartContext);
 
-  useEffect(() => {
-    if (tempPayment) {
-      setTempPayment(null); // Clear temporary payment
-    }
-  }, [tempPayment, setTempPayment]);
-
-  const name = payment?.nameOnCard || tempPayment?.nameOnCard || 'John Doe'; // Use stored payment name if available
+  const name = payment?.nameOnCard || tempPayment?.nameOnCard || 'John Doe';
   const totalPrice = cart.reduce((total, item) => total + parseFloat(item.price || 0), 0);
   const tax = totalPrice * 0.08;
   const totalWithTax = (totalPrice + tax).toFixed(2);
@@ -29,7 +23,7 @@ function PickupConfirmationPage() {
           {cart.map((item, index) => (
             <div key={index} className="book-item-pickup">
               <span>{index + 1}. {item.title}</span>
-              <span>Price: ${ parseFloat(item.price).toFixed(2)}</span>
+              <span>Price: ${parseFloat(item.price).toFixed(2)}</span>
             </div>
           ))}
         </div>

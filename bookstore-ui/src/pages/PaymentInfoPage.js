@@ -28,7 +28,8 @@ function PaymentInfoPage() {
 
   const handleNext = (e) => {
     e.preventDefault();
-    setTempPayment(formData); // Store temporarily
+    console.log('Form Data:', formData);
+    setTempPayment(formData);
     if (isPickup) {
       navigate('/pickup-confirmation');
     } else {
