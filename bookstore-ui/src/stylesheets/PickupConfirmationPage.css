@@ -1,0 +1,53 @@
+.pickup-confirmation-page {
+  text-align: center;
+  padding: 20px;
+}
+
+.purchase-title-pickup {
+  font-size: 2em;
+  color: #6666ff;
+  margin-bottom: 20px;
+}
+
+.pickup-box-pickup {
+  background-color: #f8e6f8;
+  padding: 20px;
+  border-radius: 8px;
+  display: inline-block;
+  text-align: left;
+  width: 80%;
+  max-width: 600px;
+  box-sizing: border-box;
+}
+
+.pickup-box-pickup h3,
+.pickup-box-pickup p {
+  text-align: center;
+}
+
+.store-name-pickup {
+  color: #6666ff;
+}
+
+.not-ready-pickup {
+  color: red;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.book-list-pickup {
+  margin-top: 20px;
+}
+
+.book-item-pickup {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.total-row-pickup {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  font-weight: bold;
+}
