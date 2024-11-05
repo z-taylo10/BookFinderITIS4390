@@ -1,0 +1,47 @@
+.purchase-confirmation-page {
+  text-align: center;
+  padding: 20px;
+}
+
+.purchase-title {
+  font-size: 2em;
+  color: #6666ff;
+  margin-bottom: 20px;
+}
+
+.confirmation-box {
+  background-color: #f8e6f8;
+  padding: 20px;
+  border-radius: 8px;
+  display: inline-block;
+  text-align: left;
+  width: 80%;
+  max-width: 600px;
+  box-sizing: border-box;
+}
+
+.confirmation-box h3,
+.confirmation-box p {
+  text-align: center;
+}
+
+.book-list-confirmation {
+  margin-top: 20px;
+}
+
+.book-item-confirmation {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.total-row-confirmation {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.total-row-confirmation span + span {
+  margin-left: 15px; /* Adjust the value as needed */
+}
