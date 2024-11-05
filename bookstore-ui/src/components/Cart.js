@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 import { AuthContext } from '../context/AuthContext';
 import { AddressContext } from '../context/AddressContext';
@@ -10,7 +9,6 @@ function Cart() {
   const { cart, removeFromCart } = useContext(CartContext);
   const { isAuthenticated } = useContext(AuthContext);
   const { address } = useContext(AddressContext);
-  const navigate = useNavigate();
   const [isPickup, setIsPickup] = useState(false);
   const [isShipping, setIsShipping] = useState(false);
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
@@ -90,7 +88,11 @@ function Cart() {
           <span className={isPickup || isShipping ? 'total-text' : ''}>
             {isPickup || isShipping ? 'Total:' : 'Subtotal:'}
           </span> ${isPickup || isShipping ? totalWithTaxAndShipping : totalPrice.toFixed(2)}
-          {(isPickup || isShipping) && <button className="purchase-button">Purchase</button>}
+          {(isPickup || isShipping) && (
+            <button className="purchase-button">
+              {isShipping && !isAuthenticated ? 'Purchase Now' : 'Purchase'}
+            </button>
+          )}
         </div>
       </div>
       <SignInModal isOpen={isSignInModalOpen} toggleModal={toggleSignInModal} />
