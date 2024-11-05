@@ -70,6 +70,8 @@
   gap: 20px;
   margin-top: 20px;
   margin-left: 3vw;
+  margin-right: 2vw;
+  align-items: center;
 }
 
 .ship-button, .pickup-button {
@@ -91,4 +93,45 @@
   border: 1px solid #000;
   font-size: 1.2em;
   font-weight: bold;
+  position: relative;
+}
+
+.pickup-button.active {
+  background-color: #d3d3d3;
+  color: #333;
+}
+
+.cart-tax {
+  margin-left: auto;
+  font-size: 1.2em;
+  display: inline-block;
+}
+
+.purchase-button {
+  padding: 10px 20px;
+  background-color: pink;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333;
+  width: auto;
+  margin-top: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.cart-subtotal .purchase-button {
+  display: block; /* Show when pickup is active */
+}
+
+.cart-subtotal span {
+  font-size: 1.2em; /* Default size for Subtotal */
+}
+
+.cart-subtotal .total-text {
+  font-size: 1.2em; /* Larger size for Total */
+  margin-right: 10px; /* Move to the left */
 }

@@ -1,16 +1,19 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
-import '../stylesheets/CartPage.css'; // Import the new stylesheet
+import '../stylesheets/CartPage.css';
 
 function Cart() {
   const { cart, removeFromCart } = useContext(CartContext);
   const navigate = useNavigate();
+  const [isPickup, setIsPickup] = useState(false);
 
-  const totalPrice = cart.reduce((total, item) => total + parseFloat(item.price || 0), 0).toFixed(2);
+  const totalPrice = cart.reduce((total, item) => total + parseFloat(item.price || 0), 0);
+  const tax = isPickup ? totalPrice * 0.08 : 0;
+  const totalWithTax = (totalPrice + tax).toFixed(2);
 
-  const handleShipToYou = () => {
-    navigate('/shipping');
+  const handlePickupToggle = () => {
+    setIsPickup(!isPickup);
   };
 
   return (
@@ -18,7 +21,7 @@ function Cart() {
       <h2 className="cart-title">Your Cart</h2>
       <div className="cart-container">
         <div className="cart-header">
-          <span>Price:</span>
+          <span>Price</span>
         </div>
         <ul className="cart-list">
           {cart.map((item, index) => (
@@ -38,11 +41,19 @@ function Cart() {
           ))}
         </ul>
         <div className="cart-actions">
-          <button onClick={handleShipToYou} className="ship-button">Ship to You</button>
-          <button className="pickup-button">Pick up at Store</button>
+          <button className="ship-button">Ship to You</button>
+          <button onClick={handlePickupToggle} className={`pickup-button ${isPickup ? 'active' : ''}`}>
+            Pick up at Store
+          </button>
+          {isPickup && (
+            <span className="cart-tax">Tax 8%: ${tax.toFixed(2)}</span>
+          )}
         </div>
         <div className="cart-subtotal">
-          <span>Subtotal:</span> ${totalPrice}
+          <span className={isPickup ? 'total-text' : ''}>
+            {isPickup ? 'Total:' : 'Subtotal:'}
+          </span> ${isPickup ? totalWithTax : totalPrice.toFixed(2)}
+          {isPickup && <button className="purchase-button">Purchase</button>}
         </div>
       </div>
     </div>
