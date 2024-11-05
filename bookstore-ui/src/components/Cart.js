@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
+import '../stylesheets/CartPage.css'; // Import the new stylesheet
 
 function Cart() {
   const { cart, removeFromCart } = useContext(CartContext);
   const navigate = useNavigate();
-
-  console.log('Rendering cart with items:', cart); // Debugging line
 
   const totalPrice = cart.reduce((total, item) => total + parseFloat(item.price || 0), 0).toFixed(2);
 
@@ -15,25 +14,36 @@ function Cart() {
   };
 
   return (
-    <div>
-      <h2>Your Cart</h2>
-      <ul style={{ listStyleType: 'none', padding: 0 }}>
-        {cart.map((item, index) => (
-          <li key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '20px', width: '70%', margin: '0 auto', border: '1px solid #ddd', padding: '10px', borderRadius: '8px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>
-            <img src={item.thumbnail} alt={`${item.title} cover`} style={{ width: '80px', marginRight: '20px' }} />
-            <div style={{ flexGrow: 1 }}>
-              <p><strong>Title:</strong> {item.title}</p>
-              <p><strong>Author(s):</strong> {item.authors || 'N/A'}</p>
-            </div>
-            <div style={{ marginRight: '20px' }}>${item.price}</div>
-            <button onClick={() => removeFromCart(index)} style={{ marginLeft: '10px' }}>Remove</button>
-          </li>
-        ))}
-      </ul>
-      <h3>Total: ${totalPrice}</h3>
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '20px' }}>
-        <button onClick={handleShipToYou} style={{ padding: '10px 20px', borderRadius: '5px', backgroundColor: '#007bff', color: 'white', border: 'none', cursor: 'pointer' }}>Ship to You</button>
-        <button style={{ padding: '10px 20px', borderRadius: '5px', backgroundColor: '#28a745', color: 'white', border: 'none', cursor: 'pointer' }}>Pick up at Store</button>
+    <div className="cart-page">
+      <h2 className="cart-title">Your Cart</h2>
+      <div className="cart-container">
+        <div className="cart-header">
+          <span>Price:</span>
+        </div>
+        <ul className="cart-list">
+          {cart.map((item, index) => (
+            <li key={index} className="cart-item">
+              <button onClick={() => removeFromCart(index)} className="remove-button">
+                <img src="/remove.png" alt="Remove" />
+              </button>
+              <div className="cart-item-image">
+                <img src={item.thumbnail} alt={`${item.title} cover`} />
+              </div>
+              <div className="cart-item-details">
+                <p><strong>Title:</strong> {item.title}</p>
+                <p><strong>Author(s):</strong> {item.authors || 'N/A'}</p>
+              </div>
+              <div className="cart-item-price">${item.price}</div>
+            </li>
+          ))}
+        </ul>
+        <div className="cart-actions">
+          <button onClick={handleShipToYou} className="ship-button">Ship to You</button>
+          <button className="pickup-button">Pick up at Store</button>
+        </div>
+        <div className="cart-subtotal">
+          <span>Subtotal:</span> ${totalPrice}
+        </div>
       </div>
     </div>
   );
