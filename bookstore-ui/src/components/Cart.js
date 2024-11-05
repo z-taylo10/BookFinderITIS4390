@@ -1,19 +1,37 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
+import { AuthContext } from '../context/AuthContext';
+import { AddressContext } from '../context/AddressContext';
+import SignInModal from './SignInModal';
 import '../stylesheets/CartPage.css';
 
 function Cart() {
   const { cart, removeFromCart } = useContext(CartContext);
+  const { isAuthenticated } = useContext(AuthContext);
+  const { address } = useContext(AddressContext);
   const navigate = useNavigate();
   const [isPickup, setIsPickup] = useState(false);
+  const [isShipping, setIsShipping] = useState(false);
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
 
   const totalPrice = cart.reduce((total, item) => total + parseFloat(item.price || 0), 0);
-  const tax = isPickup ? totalPrice * 0.08 : 0;
-  const totalWithTax = (totalPrice + tax).toFixed(2);
+  const tax = (isPickup || isShipping) ? totalPrice * 0.08 : 0;
+  const shipping = isShipping ? cart.length * 0.05 * totalPrice : 0;
+  const totalWithTaxAndShipping = (totalPrice + tax + shipping).toFixed(2);
 
   const handlePickupToggle = () => {
     setIsPickup(!isPickup);
+    setIsShipping(false);
+  };
+
+  const handleShippingToggle = () => {
+    setIsShipping(!isShipping);
+    setIsPickup(false);
+  };
+
+  const toggleSignInModal = () => {
+    setIsSignInModalOpen(!isSignInModalOpen);
   };
 
   return (
@@ -41,21 +59,41 @@ function Cart() {
           ))}
         </ul>
         <div className="cart-actions">
-          <button className="ship-button">Ship to You</button>
-          <button onClick={handlePickupToggle} className={`pickup-button ${isPickup ? 'active' : ''}`}>
-            Pick up at Store
+          <button onClick={handleShippingToggle} className={`ship-button ${isShipping ? 'active' : ''}`}>
+            Ship to You
           </button>
-          {isPickup && (
+          {isShipping ? (
+            <button
+              onClick={() => isAuthenticated ? handlePickupToggle() : toggleSignInModal()}
+              className={`pickup-button ${isPickup ? 'active' : ''}`}
+            >
+              {isAuthenticated ? 'Pick up at Store' : 'Log In'}
+            </button>
+          ) : (
+            <button
+              onClick={handlePickupToggle}
+              className={`pickup-button ${isPickup ? 'active' : ''}`}
+            >
+              Pick up at Store
+            </button>
+          )}
+          {(isPickup || isShipping) && (
             <span className="cart-tax">Tax 8%: ${tax.toFixed(2)}</span>
           )}
         </div>
+        {isShipping && isAuthenticated && address.fullName && (
+          <div className="cart-shipping-row">
+            <span className="cart-shipping">Shipping: ${shipping.toFixed(2)}</span>
+          </div>
+        )}
         <div className="cart-subtotal">
-          <span className={isPickup ? 'total-text' : ''}>
-            {isPickup ? 'Total:' : 'Subtotal:'}
-          </span> ${isPickup ? totalWithTax : totalPrice.toFixed(2)}
-          {isPickup && <button className="purchase-button">Purchase</button>}
+          <span className={isPickup || isShipping ? 'total-text' : ''}>
+            {isPickup || isShipping ? 'Total:' : 'Subtotal:'}
+          </span> ${isPickup || isShipping ? totalWithTaxAndShipping : totalPrice.toFixed(2)}
+          {(isPickup || isShipping) && <button className="purchase-button">Purchase</button>}
         </div>
       </div>
+      <SignInModal isOpen={isSignInModalOpen} toggleModal={toggleSignInModal} />
     </div>
   );
 }

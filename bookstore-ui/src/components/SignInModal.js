@@ -23,7 +23,9 @@ function SignInModal({ isOpen, toggleModal }) {
     if (email && password) {
       signIn();
       toggleModal();
-      navigate('/accounts');
+      if (window.location.pathname !== '/cart') {
+        navigate('/accounts');
+      }
     } else {
       alert('Please enter both email and password.');
     }
