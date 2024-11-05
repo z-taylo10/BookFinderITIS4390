@@ -1,12 +1,14 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../stylesheets/AccountsPage.css';
+import ConfirmationModal from '../components/ConfirmationModal'; // Import the modal
 import { AuthContext } from '../context/AuthContext';
 import { WishlistContext } from '../context/WishlistContext';
 import { CartContext } from '../context/CartContext';
 import { AddressContext } from '../context/AddressContext';
 import { PaymentContext } from '../context/PaymentContext';
 import { UserContext } from '../context/UserContext';
+
 
 const formatPhoneNumber = (phoneNumber) => {
   if (!phoneNumber) return '';
@@ -24,11 +26,22 @@ function AccountsPage() {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false); // State for modal visibility
 
   const handleLogout = () => {
+    setShowLogoutModal(true); // Show modal on logout button click
+  };
+
+  const confirmLogout = () => {
+    setShowLogoutModal(false);
     signOut();
     navigate('/');
   };
+
+  const cancelLogout = () => {
+    setShowLogoutModal(false); // Hide modal if user cancels
+  };
+
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -141,6 +154,12 @@ function AccountsPage() {
           </div>
         </div>
       </div>
+            {/* Confirmation Modal */}
+            <ConfirmationModal
+        isOpen={showLogoutModal}
+        onConfirm={confirmLogout}
+        onCancel={cancelLogout}
+      />
     </div>
   );
 }
