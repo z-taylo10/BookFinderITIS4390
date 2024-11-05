@@ -33,10 +33,6 @@
   background: none;
 }
 
-.modal1 input {
-  color: black;
-}
-
 .modal-content1 input {
   width: 90%;
   padding: 10px;
@@ -44,11 +40,13 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #d8c8f0;
+  color: #fff;
 }
 
 .modal-content1 input[type="email"],
 .modal-content1 input[type="password"] {
   background-color: #d8c8f0;
+  color: #fff;
 }
 
 .actions1 {
@@ -72,6 +70,7 @@
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
+  color: #fff;
   padding: 15px 1%;
 }
 
@@ -86,15 +85,14 @@
 }
 
 .terms1 {
-  color: #fff;
+  color: #666;
   text-decoration: none;
 }
 
 .actions1 label {
   transform: translateX(-30%);
   white-space: nowrap;
-  /* color:#616161; */
-  color: #fff;
+  color:#616161;
 }
 
 .close-icon1 {
