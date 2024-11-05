@@ -15,12 +15,14 @@ export const AddressProvider = ({ children }) => {
     };
   });
 
+  const [tempAddress, setTempAddress] = useState(null);
+
   useEffect(() => {
     localStorage.setItem('address', JSON.stringify(address));
   }, [address]);
 
   return (
-    <AddressContext.Provider value={{ address, setAddress }}>
+    <AddressContext.Provider value={{ address, setAddress, tempAddress, setTempAddress }}>
       {children}
     </AddressContext.Provider>
   );

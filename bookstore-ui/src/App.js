@@ -20,6 +20,10 @@ import { AddressProvider } from './context/AddressContext';
 import { PaymentProvider } from './context/PaymentContext';
 import PaymentPage from './pages/PaymentPage';
 import { UserProvider } from './context/UserContext';
+import PaymentInfoPage from './pages/PaymentInfoPage';
+import PickupConfirmationPage from './pages/PickupConfirmationPage';
+import ShippingInfoPage from './pages/ShippingInfoPage';
+import PurchaseConfirmationPage from './pages/PurchaseConfirmationPage';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -51,6 +55,10 @@ function App() {
                     <Route path="/recommendations" element={<BookRecommendationsPage />} />
                     <Route path="/shipping" component={Shipping} />
                     <Route path="/payment" element={<PaymentPage />} />
+                    <Route path="/payment-info" element={<PaymentInfoPage />} />
+                    <Route path="/pickup-confirmation" element={<PickupConfirmationPage />} />
+                    <Route path="/shipping-info" element={<ShippingInfoPage />} />
+                    <Route path="/purchase-confirmation" element={<PurchaseConfirmationPage />} />
                   </Routes>
                   <Footer />
                 </div>

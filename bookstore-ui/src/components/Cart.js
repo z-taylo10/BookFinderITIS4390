@@ -1,7 +1,9 @@
 import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 import { AuthContext } from '../context/AuthContext';
 import { AddressContext } from '../context/AddressContext';
+import { PaymentContext } from '../context/PaymentContext';
 import SignInModal from './SignInModal';
 import '../stylesheets/CartPage.css';
 
@@ -9,6 +11,8 @@ function Cart() {
   const { cart, removeFromCart } = useContext(CartContext);
   const { isAuthenticated } = useContext(AuthContext);
   const { address } = useContext(AddressContext);
+  const { payment } = useContext(PaymentContext);
+  const navigate = useNavigate();
   const [isPickup, setIsPickup] = useState(false);
   const [isShipping, setIsShipping] = useState(false);
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
@@ -30,6 +34,26 @@ function Cart() {
 
   const toggleSignInModal = () => {
     setIsSignInModalOpen(!isSignInModalOpen);
+  };
+
+  const handlePurchase = () => {
+    if (isShipping) {
+      if (!isAuthenticated) {
+        navigate('/shipping-info');
+      } else if (!address.fullName) {
+        navigate('/shipping-info');
+      } else if (!payment.cardNumber) {
+        navigate('/payment-info');
+      } else {
+        navigate('/purchase-confirmation'); // Redirect to the purchase confirmation page
+      }
+    } else if (isPickup) {
+      if (isAuthenticated && payment.cardNumber) {
+        navigate('/pickup-confirmation');
+      } else {
+        navigate('/payment-info');
+      }
+    }
   };
 
   return (
@@ -89,7 +113,7 @@ function Cart() {
             {isPickup || isShipping ? 'Total:' : 'Subtotal:'}
           </span> ${isPickup || isShipping ? totalWithTaxAndShipping : totalPrice.toFixed(2)}
           {(isPickup || isShipping) && (
-            <button className="purchase-button">
+            <button className="purchase-button" onClick={handlePurchase}>
               {isShipping && !isAuthenticated ? 'Purchase Now' : 'Purchase'}
             </button>
           )}

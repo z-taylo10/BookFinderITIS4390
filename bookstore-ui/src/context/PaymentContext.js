@@ -13,12 +13,14 @@ export const PaymentProvider = ({ children }) => {
     };
   });
 
+  const [tempPayment, setTempPayment] = useState(null);
+
   useEffect(() => {
     localStorage.setItem('payment', JSON.stringify(payment));
   }, [payment]);
 
   return (
-    <PaymentContext.Provider value={{ payment, setPayment }}>
+    <PaymentContext.Provider value={{ payment, setPayment, tempPayment, setTempPayment }}>
       {children}
     </PaymentContext.Provider>
   );
