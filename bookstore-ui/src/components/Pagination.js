@@ -7,7 +7,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
 
   return (
     <div className="pagination">
-      <img src="/left.png" height={15} width={15} alt="Left Arrow" onClick={() => onPageChange(currentPage - 1)} />
+      <img src="/left.png" alt="Left Arrow" onClick={() => onPageChange(currentPage - 1)} />
       <button className="page-link" onClick={() => onPageChange(1)} disabled={currentPage === 1}>
         {t('page')} 1
       </button>
@@ -23,7 +23,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
       <button className="page-link" onClick={() => onPageChange(totalPages)} disabled={currentPage === totalPages}>
         {t('lastPage')}
       </button>
-      <img src="/right.png" height={15} width={15} alt="Right Arrow" onClick={() => onPageChange(currentPage + 1)} />
+      <img src="/right.png" alt="Right Arrow" onClick={() => onPageChange(currentPage + 1)} />
     </div>
   );
 }
