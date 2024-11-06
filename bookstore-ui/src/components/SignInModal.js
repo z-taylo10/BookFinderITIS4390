@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import '../stylesheets/SignInModal.css';
 import CreateAccountModal from './CreateAccountModal';
 import { AuthContext } from '../context/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 function SignInModal({ isOpen, toggleModal }) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [isCreateAccountOpen, setIsCreateAccountOpen] = useState(false);
   const { signIn } = useContext(AuthContext);
@@ -27,7 +29,7 @@ function SignInModal({ isOpen, toggleModal }) {
         navigate('/accounts');
       }
     } else {
-      alert('Please enter both email and password.');
+      alert(t('pleaseEnterEmailAndPassword'));
     }
   };
 
@@ -42,20 +44,20 @@ function SignInModal({ isOpen, toggleModal }) {
           <button className="close" onClick={closeAllModals}>
             <img className="close-icon" src="/X.png" alt="Close" />
           </button>
-          <h2>Sign in or Create an Account</h2>
-          <input type="email" placeholder="Email Address" />
-          <input type="password" placeholder="Password" />
+          <h2>{t('signInOrCreateAccount')}</h2>
+          <input type="email" placeholder={t('emailAddress')} />
+          <input type="password" placeholder={t('password')} />
           <div className="actions">
             <div>
               <input type="checkbox" id="rememberMe" />
-              <label htmlFor="rememberMe">Remember Me</label>
+              <label htmlFor="rememberMe">{t('rememberMe')}</label>
             </div>
-            <a href="/">Forgot Password?</a>
+            <a href="/">{t('forgotPassword')}</a>
           </div>
-          <button className="sign-in-button" onClick={handleSignIn}>Sign In</button>
-          <button className="create-account-button" onClick={openCreateAccount}>Create an Account</button>
-          <a href="/" className="underline">Continue as a Guest</a>
-          <a href="/" className="terms">Terms of Use & Privacy Policy</a>
+          <button className="sign-in-button" onClick={handleSignIn}>{t('signIn')}</button>
+          <button className="create-account-button" onClick={openCreateAccount}>{t('createAccount')}</button>
+          <a href="/" className="underline">{t('continueAsGuest')}</a>
+          <a href="/" className="terms">{t('termsOfUse')}</a>
         </div>
       </div>
       <CreateAccountModal isOpen={isCreateAccountOpen} closeAllModals={closeAllModals} />

@@ -51,7 +51,7 @@ const Footer = () => {
             </div>
             <div className="footer-bottom">
                 <hr />
-                © 2024 BookWiz. All Rights Reserved.
+                © 2024 BookWiz. {t('allRightsReserved')}
             </div>
         </div>
     );

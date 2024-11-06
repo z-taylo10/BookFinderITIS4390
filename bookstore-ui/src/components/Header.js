@@ -7,6 +7,7 @@ import SignInModal from './SignInModal';
 import CreateAccountModal from './CreateAccountModal';
 import ConfirmationModal from './ConfirmationModal';
 import '../stylesheets/Header.css';
+import { useTranslation } from 'react-i18next';
 
 function Header() {
   const [query, setQuery] = useState('');
@@ -18,6 +19,7 @@ function Header() {
   const { cart } = useContext(CartContext);
   const { isAuthenticated, signOut } = useContext(AuthContext);
   const dropdownRef = useRef(null);
+  const { t } = useTranslation();
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -70,19 +72,19 @@ function Header() {
       </div>
       <div className="nav-buttons">
         <div className="nav-button">
-          <button onClick={() => navigate('/')}>Home</button>
+          <button onClick={() => navigate('/')}>{t('home')}</button>
           <div className="home-dropdown">
             <ul>
-              <li><button onClick={() => navigate('/')}>About</button></li>
-              <li><button onClick={() => navigate('/recommendations')}>Recommended</button></li>
-              <li><button onClick={() => navigate('/')}>News / Blog</button></li>
-              <li><button onClick={() => navigate('/')}>Store Policies</button></li>
-              <li><button onClick={() => navigate('/')}>Contact Us</button></li>
+              <li><button onClick={() => navigate('/')}>{t('about')}</button></li>
+              <li><button onClick={() => navigate('/recommendations')}>{t('recommended')}</button></li>
+              <li><button onClick={() => navigate('/')}>{t('blog')}</button></li>
+              <li><button onClick={() => navigate('/')}>{t('storePolicies')}</button></li>
+              <li><button onClick={() => navigate('/')}>{t('contactUs')}</button></li>
             </ul>
           </div>
         </div>
         <div className="nav-button">
-          <button onClick={() => navigate('/genres')}>Books</button>
+          <button onClick={() => navigate('/genres')}>{t('books')}</button>
           <div className="books-dropdown">
             <ul>
               {mainGenres.slice(0, 3).map((genre, index) => (
@@ -117,7 +119,7 @@ function Header() {
         />
         <input
           type="text"
-          placeholder="Search"
+          placeholder={t('searchPlaceholder')}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyPress={(e) => e.key === 'Enter' && handleSearch(e)}
@@ -126,19 +128,19 @@ function Header() {
       <div className="cart-profile">
         <Link to="/cart">
           <img className="cart-icon" src="/cart.png" alt="Cart"/>  
-          <span>${totalAmount} ({itemCount} {itemCount === 1 ? 'item' : 'items'})</span>
+          <span>${totalAmount} ({itemCount} {itemCount === 1 ? t('item') : t('items')})</span>
         </Link>
         <div className="profile-dropdown-container" ref={dropdownRef}>
           <img className="profile-icon" src="/generic_avatar.png" alt="Profile" onClick={toggleDropdown} />
           {dropdownVisible && (
             <div className="profile-dropdown">
               {isAuthenticated ? (
-                <button onClick={toggleLogoutModal}>Log Out</button>
+                <button onClick={toggleLogoutModal}>{t('logOut')}</button>
               ) : (
-                <button className="sign-in" onClick={toggleSignInModal}>Sign In</button>
+                <button className="sign-in" onClick={toggleSignInModal}>{t('signIn')}</button>
               )}
               {!isAuthenticated && (
-                <button onClick={toggleCreateAccountModal}>Create an Account</button>
+                <button onClick={toggleCreateAccountModal}>{t('createAccount')}</button>
               )}
               <button onClick={() => {
                 if (isAuthenticated) {
@@ -146,14 +148,14 @@ function Header() {
                 } else {
                   toggleSignInModal();
                 }
-              }}>Manage Account</button>
+              }}>{t('manageAccount')}</button>
               <button onClick={() => {
                 if (isAuthenticated) {
                   navigate('/accounts');
                 } else {
                   toggleSignInModal();
                 }
-              }}>My Digital Library</button>
+              }}>{t('myDigitalLibrary')}</button>
             </div>
           )}
         </div>
@@ -162,8 +164,8 @@ function Header() {
       <CreateAccountModal isOpen={isCreateAccountModalOpen} closeAllModals={toggleCreateAccountModal} />
       <ConfirmationModal
         isOpen={isLogoutModalOpen}
-        title="Confirm Logout"
-        message="Are you sure you want to logout?"
+        title={t('confirmLogout')}
+        message={t('logoutMessage')}
         onConfirm={confirmLogout}
         onCancel={toggleLogoutModal}
       />

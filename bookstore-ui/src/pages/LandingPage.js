@@ -6,8 +6,10 @@ import BookCard from '../components/BookCard';
 import '../stylesheets/LandingPage.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useTranslation } from 'react-i18next';
 
 const LandingPage = () => {
+  const { t } = useTranslation();
   const [trendingBooks, setTrendingBooks] = useState([]);
   const [moreTitles, setMoreTitles] = useState([]);
 
@@ -60,8 +62,8 @@ const LandingPage = () => {
     <div className="landing-page">
       <main className="main-content">
         <section className="hero">
-          <h1>Trending Reads!</h1>
-          <p>Popular Books you might personally enjoy!</p>
+          <h1>{t('trendingReads')}</h1>
+          <p>{t('popularBooks')}</p>
           <Slider {...carouselSettings} className="trending-books-carousel">
             {trendingBooks.map((book, index) => (
               <BookCard
@@ -76,7 +78,7 @@ const LandingPage = () => {
         </section>
 
         <section className="additional-books">
-          <h2>More Titles</h2>
+          <h2>{t('moreTitles')}</h2>
           <div className="book-grid">
             {moreTitles.map((book, index) => (
               <BookCard
