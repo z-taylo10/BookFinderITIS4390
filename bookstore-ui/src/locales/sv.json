@@ -67,5 +67,15 @@
   "addToWishlist": "Lägg till i önskelista",
   "viewDetails": "Detaljer",
   "buy": "Köpa",
-  "wishlist": "Önskelista"
+  "wishlist": "Önskelista",
+  "yourCart": "Din Kundvagn",
+  "price": "Pris",
+  "shipToYou": "Skicka till dig",
+  "pickUpAtStore": "Hämta i butik",
+  "tax": "Skatt: 8%",
+  "shipping": "Frakt:",
+  "total": "Totalt:",
+  "subtotal": "Delsumma:",
+  "purchaseNow": "Köp nu",
+  "purchase": "Köp"
 }

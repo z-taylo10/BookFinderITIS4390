@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { CartContext } from '../context/CartContext';
 import { AuthContext } from '../context/AuthContext';
 import { AddressContext } from '../context/AddressContext';
@@ -8,6 +9,7 @@ import SignInModal from './SignInModal';
 import '../stylesheets/CartPage.css';
 
 function Cart() {
+  const { t } = useTranslation();
   const { cart, removeFromCart, isPickup, togglePickup } = useContext(CartContext);
   const { isAuthenticated } = useContext(AuthContext);
   const { address } = useContext(AddressContext);
@@ -59,10 +61,10 @@ function Cart() {
 
   return (
     <div className="cart-page">
-      <h2 className="cart-title">Your Cart</h2>
+      <h2 className="cart-title">{t('yourCart')}</h2>
       <div className="cart-container">
         <div className="cart-header">
-          <span>Price</span>
+          <span>{t('price')}</span>
         </div>
         <ul className="cart-list">
           {cart.map((item, index) => (
@@ -82,31 +84,35 @@ function Cart() {
           ))}
         </ul>
         <div className="cart-actions">
-          <button onClick={handleShippingToggle} className={`ship-button ${isShipping ? 'active' : ''}`}>
-            Ship to You
-          </button>
-          <button
-            onClick={handlePickupToggle}
-            className={`pickup-button ${isPickup && !isShipping ? 'active' : ''}`}
-          >
-            Pick up at Store
-          </button>
-          {(isPickup || isShipping) && (
-            <span className="cart-tax">Tax 8%: ${tax.toFixed(2)}</span>
+          {cart.length > 0 && (
+            <>
+              <button onClick={handleShippingToggle} className={`ship-button ${isShipping ? 'active' : ''}`}>
+                {t('shipToYou')}
+              </button>
+              <button
+                onClick={handlePickupToggle}
+                className={`pickup-button ${isPickup && !isShipping ? 'active' : ''}`}
+              >
+                {t('pickUpAtStore')}
+              </button>
+              {(isPickup || isShipping) && (
+                <span className="cart-tax">{t('tax')}: ${tax.toFixed(2)}</span>
+              )}
+            </>
           )}
         </div>
         {isShipping && isAuthenticated && address.fullName && (
           <div className="cart-shipping-row">
-            <span className="cart-shipping">Shipping: ${shipping.toFixed(2)}</span>
+            <span className="cart-shipping">{t('shipping')}: ${shipping.toFixed(2)}</span>
           </div>
         )}
         <div className="cart-subtotal">
           <span className={isPickup || isShipping ? 'total-text' : ''}>
-            {isPickup || isShipping ? 'Total:' : 'Subtotal:'}
+            {isPickup || isShipping ? t('total') : t('subtotal')}
           </span> ${isPickup || isShipping ? totalWithTaxAndShipping : totalPrice.toFixed(2)}
           {(isPickup || isShipping) && (
             <button className="purchase-button" onClick={handlePurchase}>
-              {isShipping && !isAuthenticated ? 'Purchase Now' : 'Purchase'}
+              {isShipping && !isAuthenticated ? t('purchaseNow') : t('purchase')}
             </button>
           )}
         </div>
