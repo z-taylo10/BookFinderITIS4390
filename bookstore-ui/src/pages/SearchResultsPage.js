@@ -4,6 +4,7 @@ import BookList from '../components/BookList';
 import Pagination from '../components/Pagination';
 import axios from 'axios';
 import '../stylesheets/SearchResultsPage.css';
+import { useTranslation } from 'react-i18next';
 
 function SearchResultsPage() {
   const location = useLocation();
@@ -19,6 +20,8 @@ function SearchResultsPage() {
 
   const baseUrl = 'https://www.googleapis.com/books/v1/volumes';
   const apiKey = 'AIzaSyD-Tmhd6vMaMMakBt2VY6Tk5SQ9CvCTS3I';
+
+  const { t } = useTranslation();
 
   // Fetch books based on the search query
   const fetchBooks = useCallback(async (searchQuery) => {
@@ -120,20 +123,20 @@ function SearchResultsPage() {
         </div>
       ) : (
         <>
-          <h2>Search Results for "{currentQuery}"</h2>
+          <h2>{t('searchResultsFor')} "{currentQuery}"</h2>
           <div className="three-column-layout">
             <div className="empty-column"></div>
             <div className="pagination-container">
               <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
             </div>
             <div className="sort-dropdown">
-              <label htmlFor="sort">Sort by: </label>
+              <label htmlFor="sort">{t('sortBy')}: </label>
               <select id="sort" value={sortOption} onChange={(e) => setSortOption(e.target.value)}>
-                <option value="popular">Popular</option>
-                <option value="A-Z">A-Z</option>
-                <option value="Z-A">Z-A</option>
-                <option value="priceLowHigh">Price: Low to High</option>
-                <option value="priceHighLow">Price: High to Low</option>
+                <option value="popular">{t('popular')}</option>
+                <option value="A-Z">{t('aToZ')}</option>
+                <option value="Z-A">{t('zToA')}</option>
+                <option value="priceLowHigh">{t('priceLowHigh')}</option>
+                <option value="priceHighLow">{t('priceHighLow')}</option>
               </select>
             </div>
           </div>

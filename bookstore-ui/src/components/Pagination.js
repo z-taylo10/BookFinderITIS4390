@@ -1,12 +1,15 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import '../stylesheets/Pagination.css';
 
 function Pagination({ currentPage, totalPages, onPageChange }) {
+  const { t } = useTranslation();
+
   return (
     <div className="pagination">
       <img src="/left.png" height={15} width={15} alt="Left Arrow" onClick={() => onPageChange(currentPage - 1)} />
       <button className="page-link" onClick={() => onPageChange(1)} disabled={currentPage === 1}>
-        Page 1
+        {t('page')} 1
       </button>
       <div className="page-circles">
         {[...Array(totalPages).keys()].map(page => (
@@ -18,9 +21,9 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
         ))}
       </div>
       <button className="page-link" onClick={() => onPageChange(totalPages)} disabled={currentPage === totalPages}>
-        Last Page
+        {t('lastPage')}
       </button>
-      <img src="/right.png"  height={15} width={15} alt="Right Arrow" onClick={() => onPageChange(currentPage + 1)} />
+      <img src="/right.png" height={15} width={15} alt="Right Arrow" onClick={() => onPageChange(currentPage + 1)} />
     </div>
   );
 }

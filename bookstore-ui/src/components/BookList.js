@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 import { WishlistContext } from '../context/WishlistContext';
 import '../stylesheets/BookList.css';
+import { useTranslation } from 'react-i18next';
 
 function BookList({ books }) {
   const { cart, addToCart, removeFromCart } = useContext(CartContext);
   const { wishlist, addToWishlist, removeFromWishlist } = useContext(WishlistContext);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const calculateAveragePrice = () => {
     const prices = books
@@ -44,7 +46,7 @@ function BookList({ books }) {
                 className="button-custom details-button-custom"
                 onClick={() => navigate(`/books/${book.id}`, { state: { price } })}
               >
-                View Details
+                {t('viewDetails')}
               </button>
               <button 
                 className="button-custom cart-button-custom" 
@@ -57,7 +59,7 @@ function BookList({ books }) {
                   }
                 }}
               >
-                {isInCart ? 'Remove from Cart' : '🛒 Add to Cart'}
+                {isInCart ? t('removeFromCart') : `🛒 ${t('buy')}`}
               </button>
               <button 
                 className="button-custom wishlist-button-custom"
@@ -70,7 +72,7 @@ function BookList({ books }) {
                   }
                 }}
               >
-                {isInWishlist ? 'Remove from Wishlist' : '❤️ Add to Wishlist'}
+                {isInWishlist ? t('removeFromWishlist') : '❤️ ' + t('wishlist')}
               </button>
             </div>
           </div>

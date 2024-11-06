@@ -5,12 +5,14 @@ import axios from 'axios';
 import BookCard from '../components/BookCard';
 import '../stylesheets/BooksPage.css';
 import { API_KEY } from '../config';
+import { useTranslation } from 'react-i18next';
 
 const BooksPage = () => {
   const [books, setBooks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [genre, setGenre] = useState('Fiction'); // Default genre
+  const { t } = useTranslation();
 
   // Fetch books based on genre and pagination
   const fetchBooks = useCallback(async () => {
@@ -50,14 +52,13 @@ const BooksPage = () => {
     <div className="books-page">
       <h1>Books</h1>
       <div className="filter-container">
-        <label htmlFor="genre-select">Filter by Genre:</label>
+        <label htmlFor="genre-select">{t('filterByGenre')}</label>
         <select id="genre-select" value={genre} onChange={handleGenreChange}>
-          <option value="Fiction">Fiction</option>
-          <option value="Science">Science</option>
-          <option value="History">History</option>
-          <option value="Fantasy">Fantasy</option>
-          <option value="Mystery">Mystery</option>
-          {/* Add more genres as needed */}
+          <option value="Fiction">{t('fiction')}</option>
+          <option value="Science">{t('science')}</option>
+          <option value="History">{t('history')}</option>
+          <option value="Fantasy">{t('fantasy')}</option>
+          <option value="Mystery">{t('mystery')}</option>
         </select>
       </div>
       <div className="books-grid">
