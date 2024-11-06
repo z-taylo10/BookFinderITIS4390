@@ -18,6 +18,8 @@
 
 .nav-button {
   position: relative;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .nav-button button {
@@ -51,11 +53,13 @@
 .books-dropdown {
   display: none;
   position: fixed;
-  top: 85px;
+  top: 80px;
   left: 0;
   width: 100vw;
+  transform: (-20%);
   background-color: #333;
   padding: 20px;
+  border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 }
@@ -65,7 +69,9 @@
 }
 
 .nav-button:hover .books-dropdown {
-  display: block;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 }
 
 .home-dropdown ul, .books-dropdown ul {
@@ -193,16 +199,4 @@
   height: 55px;
   border-radius: 50%; /* Keep the circular shape for the profile icon */
   margin-left: 10px;
-}
-
-.books-dropdown ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-
-.books-dropdown li {
-  flex: 1 1 20%;
-  padding: 10px;
-  text-align: center;
 }
