@@ -1,37 +1,41 @@
-import React, { useState, useEffect, useContext  } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { CartContext } from '../context/CartContext';
+import BookList from '../components/BookList';
 import '../stylesheets/BookRecommendationsPage.css';
 import { API_KEY } from '../config';
 
 const BookRecommendationsPage = () => {
-  const { addToCart } = useContext(CartContext);
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch only 5 books with the maxResults parameter
-    axios.get('https://www.googleapis.com/books/v1/volumes?q=Fiction&maxResults=5&key=' + API_KEY)
+    // Fetch 8 random books from popular genres
+    axios.get('https://www.googleapis.com/books/v1/volumes?q=subject:popular&maxResults=8&key=' + API_KEY)
       .then(response => {
-        const bookData = response.data.items.map(item => ({
-          title: item.volumeInfo.title,
-          genre: item.volumeInfo.categories ? item.volumeInfo.categories[0] : 'Unknown',
-          price: item.saleInfo.retailPrice ? `${item.saleInfo.retailPrice.amount}` : 'Free',
-          publisher: item.volumeInfo.publisher || 'Unknown',
-          image: item.volumeInfo.imageLinks?.thumbnail || 'No image available',
-          authors:  item.volumeInfo.authors,
-        }));
+        const bookData = response.data.items.map((item, index) => {
+          const multiplierMap = [1.2, 1.4, 1.6, 1.8, 2.0, 1.1, 1.3, 1.5];
+          const saleInfo = item.saleInfo;
+          if (!saleInfo.listPrice) {
+            saleInfo.listPrice = { amount: 9.99, currencyCode: 'USD' };
+          }
+          saleInfo.listPrice.amount *= multiplierMap[index];
+          saleInfo.listPrice.amount = parseFloat(saleInfo.listPrice.amount.toFixed(2));
+
+          return {
+            id: item.id,
+            volumeInfo: item.volumeInfo,
+            saleInfo: saleInfo,
+          };
+        });
         setBooks(bookData);
         setLoading(false);
-
       })
       .catch(() => {
         setError('Failed to fetch book recommendations');
         setLoading(false);
       });
   }, []);
-
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
@@ -40,25 +44,7 @@ const BookRecommendationsPage = () => {
     <div className="book-finder">
       <main>
         <h2>Recommended for You</h2>
-        <div className="book-list">
-          {books.map((book, index) => (
-           
-            <div key={index} className="book-card">
-              <div className="book-image">
-                <img src={book.image} alt={book.title} />
-              </div>
-              <div className="book-info">
-                <p><strong>{book.genre}</strong></p>
-                <p><strong>Price:</strong> {book.price}</p>
-                <p><strong>Publisher:</strong> {book.publisher}</p>
-              </div>
-              <button onClick={() => addToCart(book)}>Add to Cart</button>
-              <div className="book-actions">
-                <button className="btn">Add to Wishlist</button>
-              </div>
-            </div>
-          ))}
-        </div>
+        <BookList books={books} />
       </main>
     </div>
   );

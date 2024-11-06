@@ -30,15 +30,17 @@ const BookDetailPage = () => {
 
   if (!bookDetails) return <p>Loading...</p>;
 
-  const { title, authors, description, imageLinks, publishedDate, pageCount, categories } = bookDetails.volumeInfo;
+  const { title, authors, description, imageLinks, publishedDate, pageCount, categories, industryIdentifiers } = bookDetails.volumeInfo;
   const saleInfo = bookDetails.saleInfo;
   const price = saleInfo.listPrice ? `${saleInfo.listPrice.amount} ${saleInfo.listPrice.currencyCode}` : '14.99';
-  const thumbnail = imageLinks?.thumbnail || '/placeholder.jpg';
+  const thumbnail = imageLinks?.thumbnail || '/no-thumbnail.png';
 
   const isInCart = cart.some(item => item.id === bookId);
   const isInWishlist = wishlist.some(item => item.id === bookId);
 
   const cleanDescription = description ? description.replace(/<[^>]*>/g, '').replace(/(\r\n|\n|\r)/gm, ' ') : 'No description available.';
+
+  const isbn = industryIdentifiers ? industryIdentifiers.find(identifier => identifier.type.includes('ISBN'))?.identifier : 'N/A';
 
   return (
     <div className="book-detail-page">
@@ -89,11 +91,11 @@ const BookDetailPage = () => {
         </div>
         <div className="book-info">
           <p><strong>Author(s):</strong> {authors ? authors.join(', ') : 'Unknown'}</p>
+          <p><strong>ISBN:</strong> {isbn}</p>
           <p><strong>Published Date:</strong> {publishedDate || 'N/A'}</p>
           <p><strong>Page Count:</strong> {pageCount || 'N/A'}</p>
           <p><strong>Categories:</strong> {categories ? categories.join(', ') : 'N/A'}</p>
           <p><strong>Description:</strong> {cleanDescription}</p>
-          <p><strong>Price:</strong> {price}</p>
         </div>
       </div>
     </div>
