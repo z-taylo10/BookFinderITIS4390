@@ -1,13 +1,17 @@
 // src/components/Footer.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import '../stylesheets/Footer.css';
 
 const Footer = () => {
+    const { t, i18n } = useTranslation();
     const [language, setLanguage] = useState('English');
 
     const handleLanguageChange = (event) => {
-        setLanguage(event.target.value);
+        const newLanguage = event.target.value;
+        setLanguage(newLanguage);
+        i18n.changeLanguage(newLanguage === 'English' ? 'en' : 'sv');
     };
 
     return (
@@ -21,22 +25,22 @@ const Footer = () => {
                 </div>
             </div>
             <div className="footer-section">
-                <h4>Explore</h4>
+                <h4>{t('explore')}</h4>
                 <ul>
-                    <li><Link to="/genres">Genres</Link></li>
-                    <li><Link to="/recommendations">Recommended</Link></li>
-                    <li><Link to="/search">Non-Book Items</Link></li>
-                    <li><Link to="/sales">Sales</Link></li>
-                    <li><Link to="/blog">Blog</Link></li>
+                    <li><Link to="/genres">{t('genres')}</Link></li>
+                    <li><Link to="/recommendations">{t('recommended')}</Link></li>
+                    <li><Link to="/search">{t('nonBookItems')}</Link></li>
+                    <li><Link to="/sales">{t('sales')}</Link></li>
+                    <li><Link to="/blog">{t('blog')}</Link></li>
                 </ul>
             </div>
             <div className="footer-section">
-                <h4>Resources</h4>
+                <h4>{t('resources')}</h4>
                 <ul>
-                    <li><Link to="/about">About</Link></li>
-                    <li><Link to="/store-policies">Store Policies</Link></li>
-                    <li><Link to="/hours">Hours</Link></li>
-                    <li><Link to="/contact-us">Contact Us</Link></li>
+                    <li><Link to="/about">{t('about')}</Link></li>
+                    <li><Link to="/store-policies">{t('storePolicies')}</Link></li>
+                    <li><Link to="/hours">{t('hours')}</Link></li>
+                    <li><Link to="/contact-us">{t('contactUs')}</Link></li>
                     <li>
                         <select value={language} onChange={handleLanguageChange}>
                             <option value="English">English</option>
