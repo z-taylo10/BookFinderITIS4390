@@ -5,6 +5,7 @@ import { AuthContext } from '../context/AuthContext';
 import { mainGenres } from './Genres';
 import SignInModal from './SignInModal';
 import CreateAccountModal from './CreateAccountModal';
+import ConfirmationModal from './ConfirmationModal';
 import '../stylesheets/Header.css';
 
 function Header() {
@@ -12,6 +13,7 @@ function Header() {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
   const [isCreateAccountModalOpen, setIsCreateAccountModalOpen] = useState(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const navigate = useNavigate();
   const { cart } = useContext(CartContext);
   const { isAuthenticated, signOut } = useContext(AuthContext);
@@ -49,10 +51,19 @@ function Header() {
     setDropdownVisible(false);
   };
 
+  const toggleLogoutModal = () => setIsLogoutModalOpen(!isLogoutModalOpen);
+
+  const confirmLogout = () => {
+    signOut();
+    setIsLogoutModalOpen(false);
+    navigate('/');
+  };
+
   const totalAmount = cart.reduce((total, item) => total + parseFloat(item.price || 0), 0).toFixed(2);
   const itemCount = cart.length;
 
-  return (
+
+    return (
     <header className="header">
       <div className="logo">
         <Link to="/"><img src="/bookstorelogo.png" alt="Logo" /></Link>
@@ -122,7 +133,7 @@ function Header() {
           {dropdownVisible && (
             <div className="profile-dropdown">
               {isAuthenticated ? (
-                <button onClick={() => { signOut(); navigate('/'); }}>Log Out</button>
+                <button onClick={toggleLogoutModal}>Log Out</button>
               ) : (
                 <button className="sign-in" onClick={toggleSignInModal}>Sign In</button>
               )}
@@ -149,6 +160,13 @@ function Header() {
       </div>
       <SignInModal isOpen={isSignInModalOpen} toggleModal={toggleSignInModal} />
       <CreateAccountModal isOpen={isCreateAccountModalOpen} closeAllModals={toggleCreateAccountModal} />
+      <ConfirmationModal
+        isOpen={isLogoutModalOpen}
+        title="Confirm Logout"
+        message="Are you sure you want to logout?"
+        onConfirm={confirmLogout}
+        onCancel={toggleLogoutModal}
+      />
     </header>
   );
 }
