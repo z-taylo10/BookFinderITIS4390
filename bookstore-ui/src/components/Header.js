@@ -87,8 +87,20 @@ function Header() {
           <button onClick={() => navigate('/genres')}>{t('books')}</button>
           <div className="books-dropdown">
             <ul>
-              {mainGenres.map((genre, index) => (
+              {mainGenres.slice(0, 3).map((genre, index) => (
                 <li key={index}>
+                  <button onClick={() => navigate(`/genre/${genre.toLowerCase()}`)}>{genre}</button>
+                </li>
+              ))}
+              <li><button onClick={() => navigate('/non-books')} style={{ color: 'red' }}>Non Book Item</button></li>
+              {mainGenres.slice(3, 6).map((genre, index) => (
+                <li key={index + 3}>
+                  <button onClick={() => navigate(`/genre/${genre.toLowerCase()}`)}>{genre}</button>
+                </li>
+              ))}
+              <li><button onClick={() => navigate('/non-books')} style={{ color: 'red' }}>Non Book Item</button></li>
+              {mainGenres.slice(6, 9).map((genre, index) => (
+                <li key={index + 6}>
                   <button onClick={() => navigate(`/genre/${genre.toLowerCase()}`)}>{genre}</button>
                 </li>
               ))}
