@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 import '../stylesheets/GenresPage.css';
 import Pagination from './Pagination';
 
@@ -57,6 +58,7 @@ export const subGenres = [
 ];
 
 function Genres() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const genresPerPage = 9;
@@ -64,6 +66,7 @@ function Genres() {
   const [sortOption, setSortOption] = useState('popular');
   const [includeSubGenres, setIncludeSubGenres] = useState(false);
   const [cachedCovers, setCachedCovers] = useState({});
+  const [searchInput, setSearchInput] = useState('');
 
   const allGenres = useMemo(() => includeSubGenres ? [...mainGenres, ...subGenres] : mainGenres, [includeSubGenres]);
   const totalPages = Math.ceil(allGenres.length / genresPerPage);
@@ -122,7 +125,16 @@ function Genres() {
     setCurrentPage(1); // Reset to first page when toggling sub-genres
   };
 
-  const sortedGenres = [...allGenres].sort((a, b) => {
+  const handleSearchChange = (event) => {
+    setSearchInput(event.target.value);
+    setCurrentPage(1); // Reset to first page when searching
+  };
+
+  const filteredGenres = allGenres.filter(genre =>
+    genre.toLowerCase().includes(searchInput.toLowerCase())
+  );
+
+  const sortedGenres = [...filteredGenres].sort((a, b) => {
     if (sortOption === 'a-z') {
       return a.localeCompare(b);
     } else if (sortOption === 'z-a') {
@@ -139,17 +151,22 @@ function Genres() {
       <div className="genres-header">
         <div className="checkbox-container">
           <input type="checkbox" id="subgenres" checked={includeSubGenres} onChange={handleSubGenresChange} />
-          <label htmlFor="subgenres">Include Sub-Genres</label>
+          <label htmlFor="subgenres">{t('includeSubGenres')}</label>
         </div>
         <div className="genres-search-bar">
-          <input type="text" placeholder="Search genres..." />
+          <input
+            type="text"
+            placeholder={t('searchGenres')}
+            value={searchInput}
+            onChange={handleSearchChange}
+          />
         </div>
-        <div className="sort-dropdown">
-          <label htmlFor="sort">Sort: </label>
+        <div className="genre-sort-dropdown">
+          <label htmlFor="sort">{t('sort')}: </label>
           <select id="sort" value={sortOption} onChange={handleSortChange}>
-            <option value="popular">Popular</option>
-            <option value="a-z">A-Z</option>
-            <option value="z-a">Z-A</option>
+            <option value="popular">{t('popular')}</option>
+            <option value="a-z">{t('aToZ')}</option>
+            <option value="z-a">{t('zToA')}</option>
           </select>
         </div>
       </div>
@@ -158,7 +175,7 @@ function Genres() {
         {currentGenres.map((genre, index) => (
           <div key={index} className="genre-card" onClick={() => handleGenreClick(genre)}>
             <img src={covers[genre]} alt={`${genre} cover`} />
-            <h3>{genre}</h3>
+            <h3>{t(genre.toLowerCase().replace(/\s+/g, ''))}</h3>
           </div>
         ))}
       </div>

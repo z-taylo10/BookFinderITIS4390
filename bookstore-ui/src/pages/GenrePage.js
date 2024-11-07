@@ -4,6 +4,7 @@ import BookList from '../components/BookList';
 import Pagination from '../components/Pagination';
 import axios from 'axios';
 import { API_KEY } from '../config';
+import { useTranslation } from 'react-i18next';
 
 function GenrePage() {
   const { genre } = useParams();
@@ -11,10 +12,11 @@ function GenrePage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [sortOption, setSortOption] = useState('popular');
+  const { t } = useTranslation();
 
-  const capitalizeWords = (str) => {
-    return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-  };
+//  const capitalizeWords = (str) => {
+//    return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+//  };
 
   useEffect(() => {
     const fetchBooksByGenre = async () => {
@@ -129,15 +131,15 @@ function GenrePage() {
 
   return (
     <div>
-      <h2>Books in {capitalizeWords(genre)}</h2>
-      <div className="sort-dropdown">
-        <label htmlFor="sort">Sort by: </label>
+      <h2>{t('booksIn')} {t(genre.toLowerCase())}</h2>
+      <div className="genre-sort-dropdown">
+        <label htmlFor="sort">{t('sortBy')}: </label>
         <select id="sort" value={sortOption} onChange={(e) => setSortOption(e.target.value)}>
-          <option value="popular">Popular</option>
-          <option value="A-Z">A-Z</option>
-          <option value="Z-A">Z-A</option>
-          <option value="priceLowHigh">Price: Low to High</option>
-          <option value="priceHighLow">Price: High to Low</option>
+          <option value="popular">{t('popular')}</option>
+          <option value="A-Z">{t('aToZ')}</option>
+          <option value="Z-A">{t('zToA')}</option>
+          <option value="priceLowHigh">{t('priceLowHigh')}</option>
+          <option value="priceHighLow">{t('priceHighLow')}</option>
         </select>
       </div>
       <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />

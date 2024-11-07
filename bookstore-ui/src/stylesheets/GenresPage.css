@@ -67,3 +67,20 @@
   border: 1px solid #ccc;
   width: 35vw;
 }
+
+.genre-sort-dropdown {
+  display: flex;
+  align-items: center;
+  margin-top: 22px;
+  margin-left: 10px;
+  justify-content: center;
+}
+
+.genre-sort-dropdown select {
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.genre-sort-dropdown label {
+  margin-right: 10px; /* Add space between the label and the dropdown */
+}
