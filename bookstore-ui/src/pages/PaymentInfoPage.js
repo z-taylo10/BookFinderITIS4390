@@ -4,6 +4,7 @@ import { PaymentContext } from '../context/PaymentContext';
 import { AddressContext } from '../context/AddressContext';
 import { CartContext } from '../context/CartContext';
 import '../stylesheets/PaymentInfoPage.css';
+import { useTranslation } from 'react-i18next';
 
 function PaymentInfoPage() {
   const { payment, setTempPayment } = useContext(PaymentContext);
@@ -17,6 +18,7 @@ function PaymentInfoPage() {
   });
   const { address } = useContext(AddressContext);
   const { isPickup } = useContext(CartContext);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setFormData(payment);
@@ -53,20 +55,20 @@ function PaymentInfoPage() {
 
   return (
     <div className="payment-page">
-      <h2>Enter Payment Information</h2>
+      <h2>{t('enterPaymentInformation')}</h2>
       <form onSubmit={handleNext}>
         <div className="card-details">
-          <input className="payment-input" type="text" name="cardNumber" placeholder="Card Number" value={formData.cardNumber} onChange={handleChange} required pattern="\d*" maxLength="16" />
-          <input className="payment-input" type="text" name="securityCode" placeholder="SRC" value={formData.securityCode} onChange={handleChange} required pattern="\d*" maxLength="3" />
+          <input className="payment-input" type="text" name="cardNumber" placeholder={t('cardNumber')} value={formData.cardNumber} onChange={handleChange} required pattern="\d*" maxLength="16" />
+          <input className="payment-input" type="text" name="securityCode" placeholder={t('securityCode')} value={formData.securityCode} onChange={handleChange} required pattern="\d*" maxLength="3" />
         </div>
-        <input className="payment-input" type="text" name="nameOnCard" placeholder="Name on Card" value={formData.nameOnCard} onChange={handleChange} required pattern="[a-zA-Z\s]*" />
+        <input className="payment-input" type="text" name="nameOnCard" placeholder={t('nameOnCard')} value={formData.nameOnCard} onChange={handleChange} required pattern="[a-zA-Z\s]*" />
         <div className="expiration">
-          <input className="payment-input" type="text" name="expirationMonth" placeholder="Expiration Month" value={formData.expirationMonth} onChange={handleChange} required pattern="\d*" maxLength="2" />
-          <input className="payment-input" type="text" name="expirationYear" placeholder="Expiration Year" value={formData.expirationYear} onChange={handleChange} required pattern="\d*" maxLength="4" />
+          <input className="payment-input" type="text" name="expirationMonth" placeholder={t('expirationMonth')} value={formData.expirationMonth} onChange={handleChange} required pattern="\d*" maxLength="2" />
+          <input className="payment-input" type="text" name="expirationYear" placeholder={t('expirationYear')} value={formData.expirationYear} onChange={handleChange} required pattern="\d*" maxLength="4" />
         </div>
         <div className="buttons">
-          <button type="submit" className="next-button">Next</button>
-          <button type="button" className="back-button" onClick={handleBack}>Back</button>
+          <button type="submit" className="next-button">{t('next')}</button>
+          <button type="button" className="back-button" onClick={handleBack}>{t('back')}</button>
         </div>
       </form>
     </div>

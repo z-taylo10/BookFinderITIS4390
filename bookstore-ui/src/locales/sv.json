@@ -177,5 +177,9 @@
   "expirationYearError": "Utgångsdatum måste vara ett 4-siffrigt nummer.",
   "securityCodeError": "Säkerhetskod måste vara exakt 3 siffror.",
   "yes": "Ja",
-  "no": "Inga"
+  "no": "Inga",
+  "enterShippingInformation": "Ange leveransinformation",
+  "next": "Nästa",
+  "back": "Tillbaka",
+  "enterPaymentInformation": "Ange betalningsinformation"
 }

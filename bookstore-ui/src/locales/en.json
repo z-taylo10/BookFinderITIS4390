@@ -177,5 +177,9 @@
   "expirationYearError": "Expiration year must be a 4-digit number.",
   "securityCodeError": "Security code must be exactly 3 digits.",
   "yes": "Yes",
-  "no": "No"
+  "no": "No",
+  "enterShippingInformation": "Enter Shipping Information",
+  "next": "Next",
+  "back": "Back",
+  "enterPaymentInformation": "Enter Payment Information"
 }
