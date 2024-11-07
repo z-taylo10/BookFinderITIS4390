@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { CartContext } from '../context/CartContext';
@@ -17,11 +17,20 @@ function Cart() {
   const navigate = useNavigate();
   const [isShipping, setIsShipping] = useState(false);
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+  const initialRender = useRef(true);
 
   const totalPrice = cart.reduce((total, item) => total + parseFloat(item.price || 0), 0);
   const tax = (isPickup || isShipping) ? totalPrice * 0.08 : 0;
   const shipping = isShipping ? cart.length * 0.05 * totalPrice : 0;
   const totalWithTaxAndShipping = (totalPrice + tax + shipping).toFixed(2);
+
+  useEffect(() => {
+    if (initialRender.current) {
+      setIsShipping(false);
+      if (isPickup) togglePickup();
+      initialRender.current = false;
+    }
+  }, [isPickup, togglePickup]);
 
   const handlePickupToggle = () => {
     togglePickup();
@@ -46,7 +55,7 @@ function Cart() {
       } else if (!payment.cardNumber) {
         navigate('/payment-info');
       } else {
-        navigate('/purchase-confirmation'); // Redirect to the purchase confirmation page
+        navigate('/purchase-confirmation');
       }
     } else if (isPickup) {
       if (isAuthenticated && payment.cardNumber) {
@@ -56,8 +65,6 @@ function Cart() {
       }
     }
   };
-
-  console.log('isPickup in Cart:', isPickup);
 
   return (
     <div className="cart-page">
@@ -121,6 +128,5 @@ function Cart() {
     </div>
   );
 }
-
 
 export default Cart;
