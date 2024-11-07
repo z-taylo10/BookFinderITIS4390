@@ -1,14 +1,14 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import '../stylesheets/AccountsPage.css';
-import ConfirmationModal from '../components/ConfirmationModal'; // Import the modal
+import ConfirmationModal from '../components/ConfirmationModal';
 import { AuthContext } from '../context/AuthContext';
 import { WishlistContext } from '../context/WishlistContext';
 import { CartContext } from '../context/CartContext';
 import { AddressContext } from '../context/AddressContext';
 import { PaymentContext } from '../context/PaymentContext';
 import { UserContext } from '../context/UserContext';
-
 
 const formatPhoneNumber = (phoneNumber) => {
   if (!phoneNumber) return '';
@@ -18,6 +18,7 @@ const formatPhoneNumber = (phoneNumber) => {
 };
 
 function AccountsPage() {
+  const { t } = useTranslation();
   const { signOut } = useContext(AuthContext);
   const { wishlist, removeFromWishlist } = useContext(WishlistContext);
   const { addToCart } = useContext(CartContext);
@@ -26,10 +27,10 @@ function AccountsPage() {
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
-  const [showLogoutModal, setShowLogoutModal] = useState(false); // State for modal visibility
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   const handleLogout = () => {
-    setShowLogoutModal(true); // Show modal on logout button click
+    setShowLogoutModal(true);
   };
 
   const confirmLogout = () => {
@@ -39,9 +40,8 @@ function AccountsPage() {
   };
 
   const cancelLogout = () => {
-    setShowLogoutModal(false); // Hide modal if user cancels
+    setShowLogoutModal(false);
   };
-
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -76,51 +76,53 @@ function AccountsPage() {
     <div className="accounts-page">
       <div className="account-header">
         <div className="user-info">
-          <div className="user-image">[User Image]</div>
+          <div className="user-image">
+            <img src="/generic_avatar.png" alt="User Icon" className="user-icon" />
+          </div>
           <div className="user-details">
-            <p>NAME: {user.firstName} {user.lastName}</p>
-            <p>EMAIL: {user.email}</p>
-            <p>PHONE NUMBER: {formatPhoneNumber(address.phoneNumber)}</p>
+            <p>{t('name')}: {user.firstName} {user.lastName}</p>
+            <p>{t('email')}: {user.email}</p>
+            <p>{t('phoneNumber')}: {formatPhoneNumber(address.phoneNumber)}</p>
           </div>
         </div>
-        <button className="logout-button" onClick={handleLogout}>LOG OUT</button>
+        <button className="logout-button" onClick={handleLogout}>{t('logOut')}</button>
       </div>
       <div className="account-content">
         <div className="left-column">
           <div className="digital-library">
-            <h3>My Digital Library</h3>
+            <h3>{t('myDigitalLibrary')}</h3>
             <div className="wishlist">
               <div className="wishlist-header">
-                <h4>My Wishlist:</h4>
-                <img src="/expand.png" alt="Expand" className="expand-icon" onClick={toggleExpand} />
+                <h4>{t('wishlist')}:</h4>
+                <img src="/expand.png" alt={t('expand')} className="expand-icon" onClick={toggleExpand} />
               </div>
               {(isExpanded ? wishlist : wishlist.slice(0, 2)).map((item, index) => (
                 <div key={index} className="wishlist-item">
                   <span>{item.title}: {item.authors}, ${parseFloat(item.price).toFixed(2)}</span>
                   <button onClick={() => addToCart(item)} className="accounts-page add-to-cart-button">
-                    <img src="/blackcart.png" alt="Add to Cart" className="cart-icon" />
-                    <span className="add-text">ADD</span>
+                    <img src="/blackcart.png" alt={t('addToCart')} className="cart-icon" />
+                    <span className="add-text">{t('buy')}</span>
                   </button>
                   <button onClick={() => removeFromWishlist(index)} className="remove-button">
-                    <img src="/trash.png" alt="Remove from Wishlist" className="remove-icon" />
+                    <img src="/trash.png" alt={t('removeFromWishlist')} className="remove-icon" />
                   </button>
                 </div>
               ))}
             </div>
             <div className="order-history">
-              <h4>Order History</h4>
-              <div className="order-item">Title</div>
-              <div className="order-item">Title</div>
+              <h4>{t('orderHistory')}</h4>
+              <div className="order-item">{t('title')}</div>
+              <div className="order-item">{t('title')}</div>
             </div>
           </div>
         </div>
         <div className="right-column">
           <div className="shipping-info">
             <div className="shipping-header">
-              <h4>Shipping Information</h4>
+              <h4>{t('shippingInformation')}</h4>
               <div className="add-container" onClick={handleAddShipping}>
-                <span className="add-text">{address.fullName ? 'EDIT' : 'ADD'}</span>
-                <img src={address.fullName ? '/edit.png' : '/add.png'} alt="Add/Edit" className="add-icon" />
+                <span className="add-text">{address.fullName ? t('edit') : t('add')}</span>
+                <img src={address.fullName ? '/edit.png' : '/add.png'} alt={t('addEdit')} className="add-icon" />
               </div>
             </div>
             {(address.fullName || address.address || address.city || address.state || address.zipCode || address.phoneNumber) && (
@@ -131,31 +133,30 @@ function AccountsPage() {
                   <p>{address.city}, {address.state} {address.zipCode}</p>
                 )}
                 {address.phoneNumber && <p>{formatPhoneNumber(address.phoneNumber)}</p>}
-                <img src="/remove.png" alt="Remove" className="remove-icon shipping-remove-icon" onClick={handleRemoveAddress} />
+                <img src="/remove.png" alt={t('remove')} className="remove-icon shipping-remove-icon" onClick={handleRemoveAddress} />
               </div>
             )}
           </div>
           <div className="payment-method">
             <div className="payment-header">
-              <h4>Payment Method</h4>
+              <h4>{t('paymentMethod')}</h4>
               <div className="add-container" onClick={() => navigate('/payment')}>
-                <span className="add-text">{payment.cardNumber ? 'EDIT' : 'ADD'}</span>
-                <img src={payment.cardNumber ? '/edit.png' : '/add.png'} alt="Add/Edit" className="add-icon" />
+                <span className="add-text">{payment.cardNumber ? t('edit') : t('add')}</span>
+                <img src={payment.cardNumber ? '/edit.png' : '/add.png'} alt={t('addEdit')} className="add-icon" />
               </div>
             </div>
             {payment.cardNumber && (
               <div className="payment-details">
-                <p>Card Number: **** **** **** {payment.cardNumber.slice(-4)}</p>
-                <p>Name on Card: {payment.nameOnCard}</p>
-                <p>Expires: {payment.expirationMonth}/{payment.expirationYear}</p>
-                <img src="/remove.png" alt="Remove" className="remove-icon payment-remove-icon" onClick={handleRemovePayment} />
+                <p>{t('cardNumber')}: **** **** **** {payment.cardNumber.slice(-4)}</p>
+                <p>{t('nameOnCard')}: {payment.nameOnCard}</p>
+                <p>{t('expires')}: {payment.expirationMonth}/{payment.expirationYear}</p>
+                <img src="/remove.png" alt={t('remove')} className="remove-icon payment-remove-icon" onClick={handleRemovePayment} />
               </div>
             )}
           </div>
         </div>
       </div>
-            {/* Confirmation Modal */}
-            <ConfirmationModal
+      <ConfirmationModal
         isOpen={showLogoutModal}
         onConfirm={confirmLogout}
         onCancel={cancelLogout}

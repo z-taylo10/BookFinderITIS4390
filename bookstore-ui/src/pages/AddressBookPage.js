@@ -1,9 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { AddressContext } from '../context/AddressContext';
 import '../stylesheets/AddressBookPage.css';
 
 function AddressBookPage() {
+  const { t } = useTranslation();
   const { address, setAddress } = useContext(AddressContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -30,7 +32,7 @@ function AddressBookPage() {
       setAddress(formData);
       navigate('/accounts');
     } else {
-      alert('Please fill in all fields.');
+      alert(t('pleaseFillInAllFields'));
     }
   };
 
@@ -40,20 +42,20 @@ function AddressBookPage() {
 
   return (
     <div className="address-book-page">
-      <h2>Manage Address Book</h2>
-      <h3 className="subheading">Add a New Shipping Address</h3>
+      <h2>{t('manageAddressBook')}</h2>
+      <h3 className="subheading">{t('addNewShippingAddress')}</h3>
       <form onSubmit={handleSubmit}>
-        <input className="address-input" type="text" name="fullName" placeholder="Full Name" value={formData.fullName} onChange={handleChange} required />
-        <input className="address-input" type="text" name="address" placeholder="Address" value={formData.address} onChange={handleChange} required />
-        <input className="address-input" type="text" name="city" placeholder="City" value={formData.city} onChange={handleChange} required />
+        <input className="address-input" type="text" name="fullName" placeholder={t('fullName')} value={formData.fullName} onChange={handleChange} required />
+        <input className="address-input" type="text" name="address" placeholder={t('address')} value={formData.address} onChange={handleChange} required />
+        <input className="address-input" type="text" name="city" placeholder={t('city')} value={formData.city} onChange={handleChange} required />
         <div className="state-zip">
-          <input className="address-input" type="text" name="state" placeholder="State" value={formData.state} onChange={handleChange} required />
-          <input className="address-input" type="text" name="zipCode" placeholder="Zip Code" value={formData.zipCode} onChange={handleChange} required pattern="\d*" />
+          <input className="address-input" type="text" name="state" placeholder={t('state')} value={formData.state} onChange={handleChange} required />
+          <input className="address-input" type="text" name="zipCode" placeholder={t('zipCode')} value={formData.zipCode} onChange={handleChange} required pattern="\d*" />
         </div>
-        <input className="address-input" type="text" name="phoneNumber" placeholder="Phone Number" value={formData.phoneNumber} onChange={handleChange} required pattern="\d*" maxLength="10" />
+        <input className="address-input" type="text" name="phoneNumber" placeholder={t('phoneNumber')} value={formData.phoneNumber} onChange={handleChange} required pattern="\d*" maxLength="10" />
         <div className="buttons">
-          <button type="submit" className="save-button">SAVE</button>
-          <button type="button" className="cancel-button" onClick={handleCancel}>CANCEL</button>
+          <button type="submit" className="save-button">{t('save')}</button>
+          <button type="button" className="cancel-button" onClick={handleCancel}>{t('cancelButton')}</button>
         </div>
       </form>
     </div>
