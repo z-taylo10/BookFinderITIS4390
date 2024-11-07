@@ -15,8 +15,8 @@
   "books": "Böcker",
   "searchPlaceholder": "Sök",
   "cart": "Kundvagn",
-  "items": "föremål",
-  "item": "föremål",
+  "items": "Föremål",
+  "item": "Föremål",
   "logOut": "Logga ut",
   "signIn": "Logga in",
   "createAccount": "Skapa ett konto",
@@ -131,11 +131,14 @@
   "wishlist": "Önskelista",
   "yourCart": "Din Kundvagn",
   "price": "Pris",
+  "price1": "Pris",
   "shipToYou": "Skicka till dig",
   "pickUpAtStore": "Hämta i butik",
   "tax": "Skatt: 8%",
+  "tax1": "Skatt",
   "shipping1": "Frakt:",
   "shipping:": "Frakt:",
+  "shipping": "Frakt",
   "total": "Totalt",
   "subtotal": "Delsumma:",
   "purchaseNow": "Köp nu",
@@ -184,7 +187,13 @@
   "back": "Tillbaka",
   "enterPaymentInformation": "Ange betalningsinformation",
   "yourPurchase": "Ditt Köp",
-  "orderNumber": "Order #{{orderNumber}}",
+  "orderNumber": "Beställa #{{orderNumber}}",
   "estimatedArrival": "Beräknad Ankomst",
-  "shippingAddress": "Leveransadress"
+  "shippingAddress": "Leveransadress",
+  "orderType": "Beställningstyp",
+  "date": "Datum",
+  "orderTypee": {
+    "shipped": "Skickad ",
+    "pickup": "Hämtning"
+  }
 }

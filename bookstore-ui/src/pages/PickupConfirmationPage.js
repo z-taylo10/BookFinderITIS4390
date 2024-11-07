@@ -1,18 +1,36 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { PaymentContext } from '../context/PaymentContext';
 import { CartContext } from '../context/CartContext';
 import { useTranslation } from 'react-i18next';
 import '../stylesheets/PickupConfirmationPage.css';
+import { AuthContext } from '../context/AuthContext';
+import { OrderHistoryContext } from '../context/OrderHistoryContext';
 
 function PickupConfirmationPage() {
   const { payment, tempPayment } = useContext(PaymentContext);
-  const { cart } = useContext(CartContext);
+  const { cart, clearCart } = useContext(CartContext);
   const { t } = useTranslation();
+  const { isAuthenticated } = useContext(AuthContext);
+  const { addOrder } = useContext(OrderHistoryContext);
 
   const name = payment?.nameOnCard || tempPayment?.nameOnCard || 'John Doe';
   const totalPrice = cart.reduce((total, item) => total + parseFloat(item.price || 0), 0);
   const tax = totalPrice * 0.08;
   const totalWithTax = (totalPrice + tax).toFixed(2);
+
+  useEffect(() => {
+    if (isAuthenticated && cart.length > 0) {
+      addOrder({
+        type: 'Pickup',
+        date: new Date().toLocaleDateString(),
+        items: cart,
+        total: totalWithTax,
+      });
+    }
+    return () => {
+      clearCart(); // Clear the cart when navigating away
+    };
+  }, [isAuthenticated, cart, totalWithTax, addOrder, clearCart]);
 
   return (
     <div className="pickup-confirmation-page">

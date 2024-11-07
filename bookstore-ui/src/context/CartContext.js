@@ -29,8 +29,12 @@ export const CartProvider = ({ children }) => {
     setIsPickup(!isPickup);
   };
 
+  const clearCart = () => {
+    setCart([]);
+  };
+
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, isPickup, togglePickup }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, isPickup, togglePickup, clearCart }}>
       {children}
     </CartContext.Provider>
   );

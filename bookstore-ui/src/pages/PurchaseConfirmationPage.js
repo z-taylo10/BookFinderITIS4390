@@ -1,13 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { AddressContext } from '../context/AddressContext';
 import { CartContext } from '../context/CartContext';
 import { useTranslation } from 'react-i18next';
 import '../stylesheets/PurchaseConfirmationPage.css';
+import { AuthContext } from '../context/AuthContext';
+import { OrderHistoryContext } from '../context/OrderHistoryContext';
 
 function PurchaseConfirmationPage() {
   const { address, tempAddress } = useContext(AddressContext);
-  const { cart } = useContext(CartContext);
+  const { cart, clearCart } = useContext(CartContext);
   const { t } = useTranslation();
+  const { isAuthenticated } = useContext(AuthContext);
+  const { addOrder } = useContext(OrderHistoryContext);
 
   const orderNumber = Math.floor(100000 + Math.random() * 900000);
   const estimatedArrival = '09/11/2024'; // Dummy date
@@ -17,6 +21,20 @@ function PurchaseConfirmationPage() {
   const totalWithTaxAndShipping = (totalPrice + tax + shippingCost).toFixed(2);
 
   const currentAddress = tempAddress || address || {};
+
+  useEffect(() => {
+    if (isAuthenticated && cart.length > 0) {
+      addOrder({
+        type: 'Shipped',
+        date: new Date().toLocaleDateString(),
+        items: cart,
+        total: totalWithTaxAndShipping,
+      });
+    }
+    return () => {
+      clearCart(); // Clear the cart when navigating away
+    };
+  }, [isAuthenticated, cart, totalWithTaxAndShipping, addOrder, clearCart]);
 
   return (
     <div className="purchase-confirmation-page">

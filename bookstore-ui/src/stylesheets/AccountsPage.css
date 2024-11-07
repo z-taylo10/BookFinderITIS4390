@@ -228,3 +228,27 @@
     height: 50px;
     object-fit: cover;
   }
+
+  .order-history {
+    background-color: #e0e0f8;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+  }
+  
+  .order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-right: 10px;
+    border-bottom: 1px solid #686868;
+    font-size: 0.9em; /* Ensure font size is appropriate */
+    word-wrap: break-word; /* Allow text to wrap if needed */
+  }
+  
+  .order-item span {
+    flex-grow: 1;
+    text-align: left;
+    margin-right: 10px;
+  }

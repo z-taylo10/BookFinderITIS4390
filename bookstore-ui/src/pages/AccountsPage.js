@@ -9,6 +9,7 @@ import { CartContext } from '../context/CartContext';
 import { AddressContext } from '../context/AddressContext';
 import { PaymentContext } from '../context/PaymentContext';
 import { UserContext } from '../context/UserContext';
+import { OrderHistoryContext } from '../context/OrderHistoryContext';
 
 const formatPhoneNumber = (phoneNumber) => {
   if (!phoneNumber) return '';
@@ -28,6 +29,15 @@ function AccountsPage() {
   const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+
+  const orderHistoryContext = useContext(OrderHistoryContext);
+
+  if (!orderHistoryContext) {
+    console.error("OrderHistoryContext is undefined");
+    return null; // or handle the error appropriately
+  }
+
+  const { orderHistory, removeOrder } = orderHistoryContext;
 
   const handleLogout = () => {
     setShowLogoutModal(true);
@@ -111,8 +121,17 @@ function AccountsPage() {
             </div>
             <div className="order-history">
               <h4>{t('orderHistory')}</h4>
-              <div className="order-item">{t('title')}</div>
-              <div className="order-item">{t('title')}</div>
+              {orderHistory.map((order, index) => (
+                <div key={index} className="order-item">
+                  <span>{t('orderType')}: {order.type === 'Shipped' ? t('orderTypee.shipped') : t('orderTypee.pickup')}</span>
+                  <span>{t('date')}: {order.date}</span>
+                  <span>{t('items')}: {order.items.length}</span>
+                  <span>{t('total')}: ${order.total}</span>
+                  <button onClick={() => removeOrder(index)} className="remove-button">
+                    <img src="/trash.png" alt={t('remove')} className="remove-icon" />
+                  </button>
+                </div>
+              ))}
             </div>
           </div>
         </div>

@@ -15,8 +15,8 @@
   "books": "Books",
   "searchPlaceholder": "Search",
   "cart": "Cart",
-  "items": "items",
-  "item": "item",
+  "items": "Items",
+  "item": "Item",
   "logOut": "Log Out",
   "signIn": "Sign In",
   "createAccount": "Create an Account",
@@ -190,5 +190,11 @@
   "pickupAt": "Pick up at",
   "notReadyForPickup": "Not Ready for Pick Up",
   "price1": "Price",
-  "tax1": "Tax"
+  "tax1": "Tax",
+  "orderType": "Order Type",
+  "date": "Date",
+  "orderTypee": {
+    "shipped": "Shipped",
+    "pickup": "Pickup "
+  }
 }
