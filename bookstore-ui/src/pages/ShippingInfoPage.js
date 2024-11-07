@@ -34,7 +34,9 @@ function ShippingInfoPage() {
     const { fullName, address, city, state, zipCode, phoneNumber } = formData;
     if (fullName && address && city && state && zipCode && phoneNumber) {
       setTempAddress(formData);
-      if (!isAuthenticated || !payment.cardNumber) {
+      if (!isAuthenticated) {
+        navigate('/payment-info');
+      } else if (!payment.cardNumber) {
         navigate('/payment-info');
       } else {
         navigate('/purchase-confirmation');

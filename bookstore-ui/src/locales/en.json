@@ -134,8 +134,9 @@
   "shipToYou": "Ship to You",
   "pickUpAtStore": "Pick up at Store",
   "tax": "Tax: 8%",
-  "shipping": "Shipping:",
-  "total": "Total:",
+  "shipping": "Shipping",
+  "shipping1": "Shipping:",
+  "total": "Total",
   "subtotal": "Subtotal:",
   "purchaseNow": "Purchase Now",
   "purchase": "Purchase",
@@ -181,5 +182,13 @@
   "enterShippingInformation": "Enter Shipping Information",
   "next": "Next",
   "back": "Back",
-  "enterPaymentInformation": "Enter Payment Information"
+  "enterPaymentInformation": "Enter Payment Information",
+  "yourPurchase": "Your Purchase",
+  "orderNumber": "Order #{{orderNumber}}",
+  "estimatedArrival": "Estimated Arrival",
+  "shippingAddress": "Shipping Address",
+  "pickupAt": "Pick up at",
+  "notReadyForPickup": "Not Ready for Pick Up",
+  "price1": "Price",
+  "tax1": "Tax"
 }

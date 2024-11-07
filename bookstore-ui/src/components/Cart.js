@@ -103,12 +103,12 @@ function Cart() {
         </div>
         {isShipping && isAuthenticated && address.fullName && (
           <div className="cart-shipping-row">
-            <span className="cart-shipping">{t('shipping')}: ${shipping.toFixed(2)}</span>
+            <span className="cart-shipping">{t('shipping1')} ${shipping.toFixed(2)}</span>
           </div>
         )}
         <div className="cart-subtotal">
           <span className={isPickup || isShipping ? 'total-text' : ''}>
-            {isPickup || isShipping ? t('total') : t('subtotal')}
+            {isPickup || isShipping ? `${t('total')}:` : `${t('subtotal')}`}
           </span> ${isPickup || isShipping ? totalWithTaxAndShipping : totalPrice.toFixed(2)}
           {(isPickup || isShipping) && (
             <button className="purchase-button" onClick={handlePurchase}>

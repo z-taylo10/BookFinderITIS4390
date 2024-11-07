@@ -5,6 +5,7 @@ import { AddressContext } from '../context/AddressContext';
 import { CartContext } from '../context/CartContext';
 import '../stylesheets/PaymentInfoPage.css';
 import { useTranslation } from 'react-i18next';
+import { AuthContext } from '../context/AuthContext';
 
 function PaymentInfoPage() {
   const { payment, setTempPayment } = useContext(PaymentContext);
@@ -19,6 +20,7 @@ function PaymentInfoPage() {
   const { address } = useContext(AddressContext);
   const { isPickup } = useContext(CartContext);
   const { t } = useTranslation();
+  const { isAuthenticated } = useContext(AuthContext);
 
   useEffect(() => {
     setFormData(payment);
@@ -46,10 +48,12 @@ function PaymentInfoPage() {
 
     if (isPickup) {
       navigate('/cart');
-    } else if (address.fullName) {
-      navigate('/cart');
     } else {
-      navigate('/shipping-info');
+      if (!isAuthenticated || !address.fullName) {
+        navigate('/shipping-info');
+      } else {
+        navigate('/cart');
+      }
     }
   };
 
