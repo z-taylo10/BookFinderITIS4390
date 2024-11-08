@@ -196,5 +196,6 @@
   "orderTypee": {
     "shipped": "Shipped",
     "pickup": "Pickup "
-  }
+  },
+  "logIn": "Log In"
 }

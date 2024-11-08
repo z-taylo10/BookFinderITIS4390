@@ -97,10 +97,16 @@ function Cart() {
                 {t('shipToYou')}
               </button>
               <button
-                onClick={handlePickupToggle}
+                onClick={() => {
+                  if (!isAuthenticated && isShipping) {
+                    toggleSignInModal();
+                  } else {
+                    handlePickupToggle();
+                  }
+                }}
                 className={`pickup-button ${isPickup && !isShipping ? 'active' : ''}`}
               >
-                {t('pickUpAtStore')}
+                {isAuthenticated || !isShipping ? t('pickUpAtStore') : t('logIn')}
               </button>
               {(isPickup || isShipping) && (
                 <span className="cart-tax">{t('tax')}: ${tax.toFixed(2)}</span>

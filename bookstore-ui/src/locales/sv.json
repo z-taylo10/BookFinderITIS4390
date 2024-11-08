@@ -195,5 +195,6 @@
   "orderTypee": {
     "shipped": "Skickad ",
     "pickup": "Hämtning"
-  }
+  },
+  "logIn": "Logga in"
 }
