@@ -196,5 +196,7 @@
     "shipped": "Skickad ",
     "pickup": "Hämtning"
   },
-  "logIn": "Logga in"
+  "logIn": "Logga in",
+  "incorrectPassword": "lösenordet är felaktigt. försök igen.",
+  "accountNotFound": "Kontot hittades inte. Skapa ett konto."
 }

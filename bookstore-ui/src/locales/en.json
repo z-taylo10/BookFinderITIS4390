@@ -197,5 +197,8 @@
     "shipped": "Shipped",
     "pickup": "Pickup "
   },
-  "logIn": "Log In"
+  "logIn": "Log In",
+  "incorrectPassword": "The password is incorrect. Please try again.",
+  "accountNotFound": "Account Not Found. Create an Account"
+
 }

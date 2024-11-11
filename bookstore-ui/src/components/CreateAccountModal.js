@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../stylesheets/CreateAccountModal.css';
 import { AuthContext } from '../context/AuthContext';
@@ -10,6 +10,7 @@ function CreateAccountModal({ isOpen, closeAllModals }) {
   const navigate = useNavigate();
   const { signIn } = useContext(AuthContext);
   const { setUser } = useContext(UserContext);
+  const [errorMessage, setErrorMessage] = useState('');
 
   if (!isOpen) return null;
 
@@ -26,10 +27,19 @@ function CreateAccountModal({ isOpen, closeAllModals }) {
     }
 
     if (password !== confirmPassword) {
-      alert(t('passwordsDoNotMatch'));
+      alert(t('The passwords do not match. Try again.'));
       return;
     }
 
+    // Check if email already exists in localStorage
+    if (localStorage.getItem(email)) {
+      setErrorMessage(t('The email account already exits. '));
+      return;
+    }
+
+    // Save account details in localStorage
+    localStorage.setItem(email, JSON.stringify({ firstName, lastName, password }));
+    
     setUser({ firstName, lastName, email });
     signIn();
     closeAllModals();
@@ -43,6 +53,7 @@ function CreateAccountModal({ isOpen, closeAllModals }) {
           <img className="close-icon1" src="/X.png" alt="Close" />
         </button>
         <h2>{t('createAccountTitle')}</h2>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         <input type="text" data-testid="firstName" placeholder={t('firstName')} />
         <input type="text" data-testid="lastName" placeholder={t('lastName')} />
         <input type="email" data-testid="email" placeholder={t('email')} />
@@ -52,8 +63,12 @@ function CreateAccountModal({ isOpen, closeAllModals }) {
           <input type="checkbox" id="offers" />
           <label htmlFor="offers">{t('receiveOffers')}</label>
         </div>
-        <button className="create-account-button1" onClick={handleCreateAccount}>{t('createAccountButton')}</button>
-        <button className="cancel-button1" onClick={closeAllModals}>{t('cancelButton')}</button>
+        <button className="create-account-button1" onClick={handleCreateAccount}>
+          {t('createAccountButton')}
+        </button>
+        <button className="cancel-button1" onClick={closeAllModals}>
+          {t('cancelButton')}
+        </button>
         <a href="/" className="terms1">{t('termsOfUse')}</a>
       </div>
     </div>
