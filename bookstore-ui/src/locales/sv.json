@@ -198,5 +198,8 @@
   },
   "logIn": "Logga in",
   "incorrectPassword": "lösenordet är felaktigt. försök igen.",
-  "accountNotFound": "Kontot hittades inte. Skapa ett konto."
+  "accountNotFound": "Kontot hittades inte. Skapa ett konto.",
+  "loading": "Laddar...",
+  "fetchError": "Misslyckades med att hämta bokrekommendationer",
+  "recommendedForYou": "Rekommenderad för dig"
 }

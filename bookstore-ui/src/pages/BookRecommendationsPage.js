@@ -3,8 +3,10 @@ import axios from 'axios';
 import BookList from '../components/BookList';
 import '../stylesheets/BookRecommendationsPage.css';
 import { API_KEY } from '../config';
+import { useTranslation } from 'react-i18next';
 
 const BookRecommendationsPage = () => {
+  const { t } = useTranslation();
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -23,7 +25,7 @@ const BookRecommendationsPage = () => {
     ];
 
     const fetchBooks = async () => {
-      const multipliers = [1.2, 1.4, 1.6, 1.8, 2.0, 1.1, 1.3, 1.5, 1.7, 1.9]; // Define multipliers for each slot
+      const multipliers = [1.2, 1.4, 1.6, 1.8, 2.0, 1.1, 1.3, 1.5, 1.7, 1.9];
 
       try {
         const bookData = await Promise.all(isbns.map(async (isbn, index) => {
@@ -33,7 +35,7 @@ const BookRecommendationsPage = () => {
             if (!item.saleInfo.listPrice) {
               item.saleInfo.listPrice = { amount: 9.99, currencyCode: 'USD' };
             }
-            const multiplier = multipliers[index % multipliers.length]; // Use the multiplier for the current slot
+            const multiplier = multipliers[index % multipliers.length];
             item.saleInfo.listPrice.amount *= multiplier;
             item.saleInfo.listPrice.amount = parseFloat(item.saleInfo.listPrice.amount.toFixed(2));
             return {
@@ -56,13 +58,13 @@ const BookRecommendationsPage = () => {
     fetchBooks();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  if (loading) return <div>{t('loading')}</div>;
+  if (error) return <div>{t('fetchError')}</div>;
 
   return (
     <div className="book-finder">
       <main>
-        <h2>Recommended for You</h2>
+        <h2>{t('recommendedForYou')}</h2>
         <BookList books={books} />
       </main>
     </div>

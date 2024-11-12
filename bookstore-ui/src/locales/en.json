@@ -199,6 +199,9 @@
   },
   "logIn": "Log In",
   "incorrectPassword": "The password is incorrect. Please try again.",
-  "accountNotFound": "Account Not Found. Create an Account"
+  "accountNotFound": "Account Not Found. Create an Account",
+  "loading": "Loading...",
+  "fetchError": "Failed to fetch book recommendations",
+  "recommendedForYou": "Recommended for You"
 
 }
