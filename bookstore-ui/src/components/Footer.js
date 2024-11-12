@@ -30,17 +30,17 @@ const Footer = () => {
                     <li><Link to="/genres">{t('genres')}</Link></li>
                     <li><Link to="/recommendations">{t('recommended')}</Link></li>
                     <li><Link to="/search">{t('nonBookItems')}</Link></li>
-                    <li><Link to="/sales">{t('sales')}</Link></li>
-                    <li><Link to="/blog">{t('blog')}</Link></li>
+                    <li><Link to="/">{t('sales')}</Link></li>
+                    <li><Link to="/">{t('blog')}</Link></li>
                 </ul>
             </div>
             <div className="footer-section">
                 <h4>{t('resources')}</h4>
                 <ul>
-                    <li><Link to="/about">{t('about')}</Link></li>
-                    <li><Link to="/store-policies">{t('storePolicies')}</Link></li>
-                    <li><Link to="/hours">{t('hours')}</Link></li>
-                    <li><Link to="/contact-us">{t('contactUs')}</Link></li>
+                    <li><Link to="/">{t('about')}</Link></li>
+                    <li><Link to="/">{t('storePolicies')}</Link></li>
+                    <li><Link to="/">{t('hours')}</Link></li>
+                    <li><Link to="/">{t('contactUs')}</Link></li>
                     <li>
                         <select value={language} onChange={handleLanguageChange}>
                             <option value="English">English</option>
