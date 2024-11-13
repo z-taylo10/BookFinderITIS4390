@@ -202,6 +202,8 @@
   "accountNotFound": "Account Not Found. Create an Account",
   "loading": "Loading...",
   "fetchError": "Failed to fetch book recommendations",
-  "recommendedForYou": "Recommended for You"
-
+  "recommendedForYou": "Recommended for You",
+  "Cards": "Cards",
+  "Signs": "Signs",
+  "Stamps": "Stamps"
 }

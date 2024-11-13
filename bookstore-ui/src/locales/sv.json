@@ -201,5 +201,8 @@
   "accountNotFound": "Kontot hittades inte. Skapa ett konto.",
   "loading": "Laddar...",
   "fetchError": "Misslyckades med att hämta bokrekommendationer",
-  "recommendedForYou": "Rekommenderad för dig"
+  "recommendedForYou": "Rekommenderad för dig",
+  "Cards": "Kort",
+  "Signs": "Tecken",
+  "Stamps": "Stämplar"
 }

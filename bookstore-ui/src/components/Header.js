@@ -92,19 +92,19 @@ function Header() {
                   <button onClick={() => navigate(`/genre/${genre.toLowerCase()}`)}>{t(genre.toLowerCase())}</button>
                 </li>
               ))}
-              <li><button onClick={() => navigate('/non-books')} style={{ color: 'red' }}>{t('nonBookItem')}</button></li>
+              <li><button onClick={() => navigate('/')} style={{ color: 'red' }}>{t('Cards')}</button></li>
               {mainGenres.slice(3, 6).map((genre, index) => (
                 <li key={index + 3}>
                   <button onClick={() => navigate(`/genre/${genre.toLowerCase()}`)}>{t(genre.toLowerCase())}</button>
                 </li>
               ))}
-              <li><button onClick={() => navigate('/non-books')} style={{ color: 'red' }}>{t('nonBookItem')}</button></li>
+              <li><button onClick={() => navigate('/')} style={{ color: 'red' }}>{t('Signs')}</button></li>
               {mainGenres.slice(6, 9).map((genre, index) => (
                 <li key={index + 6}>
                   <button onClick={() => navigate(`/genre/${genre.toLowerCase()}`)}>{t(genre.toLowerCase())}</button>
                 </li>
               ))}
-              <li><button onClick={() => navigate('/non-books')} style={{ color: 'red' }}>{t('nonBookItem')}</button></li>
+              <li><button onClick={() => navigate('/')} style={{ color: 'red' }}>{t('Stamps')}</button></li>
             </ul>
           </div>
         </div>
